@@ -1,0 +1,14 @@
+{
+    "extends": "@yarnaimo/tss/tsconfig.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "lib": ["es2018"],
+        "baseUrl": ".",
+        "paths": {
+            "*": ["node_modules/@types/*", "src/@types/*"]
+        },
+        "types": ["@types/node", "@types/jest"]
+    },
+    "include": ["src", "server", "server/.config/*.json", "learn"],
+    "exclude": ["node_modules", "src/components", "src/pages"]
+}
