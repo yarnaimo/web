@@ -28,7 +28,7 @@ config
 coverage
 dist/**/*
 node_modules
-public
 sw.*
+workbox-*.js
 
 .now

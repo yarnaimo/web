@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 375 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-1513,0)">
+        <g id="iPhone-XS" serif:id="iPhone XS" transform="matrix(1,0,0,0.630542,263,0)">
+            <rect x="1250" y="0" width="375" height="812" style="fill:none;"/>
+            <g>
+                <g transform="matrix(0.428571,0,0,0.679688,788.214,31.4922)">
+                    <circle cx="1844" cy="61" r="28" style="fill:rgb(242,130,146);"/>
+                </g>
+                <g transform="matrix(0.285714,0,0,0.453125,1028.64,107.164)">
+                    <circle cx="1844" cy="61" r="28" style="fill:white;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
