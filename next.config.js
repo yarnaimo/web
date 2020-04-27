@@ -14,7 +14,7 @@ const nextConfig = {
     },
     experimental: {
         sassOptions: {
-            includePaths: [resolve(__dirname, '../node_modules')],
+            includePaths: [resolve(__dirname, 'node_modules')],
         },
     },
 }

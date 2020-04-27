@@ -9,6 +9,6 @@
         },
         "types": ["@types/node", "@types/jest"]
     },
-    "include": ["src", "server", "server/.config/*.json", "learn"],
+    "include": ["next-env.d.ts", "src", "server", "server/.config/*.json"],
     "exclude": ["node_modules", "src/components", "src/pages"]
 }

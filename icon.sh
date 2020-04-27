@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ASSETS=src/public/assets
+ASSETS=public/assets
 
 cp $1 $ASSETS/icon.svg
 
