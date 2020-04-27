@@ -16,7 +16,7 @@ export const navHeight = 64
 export const navMarginY = 16
 export const navAreaY = navHeight + navMarginY * 2
 
-const itemWidth = 88
+const itemWidth = 80
 const itemSideMargin = 4
 const iconOuterSize = 30
 const iconSize = 18

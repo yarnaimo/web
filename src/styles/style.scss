@@ -54,7 +54,7 @@ html {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     touch-action: manipulation;
     font-size: 14px;
     line-height: 1.6;
@@ -198,7 +198,7 @@ hr {
 
 .mdc-ripple-surface::before,
 .mdc-ripple-surface::after {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .mdc-icon-button svg,

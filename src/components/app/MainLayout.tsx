@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import React, { FC, memo } from 'react'
-import { useWindowSize } from 'react-use'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { navAreaY } from './NavBar'
@@ -9,11 +8,11 @@ export const perspective = 8
 
 const MainLayoutBlock = styled('main')<{
     lightBrown?: boolean
-    height?: number
 }>(
     {
         overflowX: 'hidden',
         overflowY: 'auto',
+        height: '100%',
 
         ...css.padding({ top: navAreaY, bottom: 0 }),
 
@@ -24,8 +23,7 @@ const MainLayoutBlock = styled('main')<{
         perspective,
         perspectiveOrigin: '50% 50%',
     },
-    ({ lightBrown, height }) => ({
-        height,
+    ({ lightBrown }) => ({
         background: lightBrown ? color.lightBrown() : color.white(),
     }),
 )
@@ -35,11 +33,5 @@ type Props = {
 }
 
 export const MainLayout: FC<Props> = memo(({ lightBrown, children }) => {
-    const { height } = useWindowSize()
-
-    return (
-        <MainLayoutBlock lightBrown={lightBrown} css={{ height }}>
-            {children}
-        </MainLayoutBlock>
-    )
+    return <MainLayoutBlock lightBrown={lightBrown}>{children}</MainLayoutBlock>
 })

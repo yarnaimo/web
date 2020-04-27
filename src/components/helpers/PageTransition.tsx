@@ -41,7 +41,7 @@ export const transitionContainerStyle = (() => {
 })()
 
 export const TransitionChild = styled('div')<{ state: TransitionState }>(
-    { ...css.absoluteFit },
+    { ...css.fixedFit },
     ({ state }) => transitionContainerStyle[state],
 )
 

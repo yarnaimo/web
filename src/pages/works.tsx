@@ -6,9 +6,9 @@ import { Title } from '../components/helpers/Title'
 
 const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
     {
+        title: () => 'ポートフォリオ',
         pinned: true,
         category: 'web',
-        title: () => 'ポートフォリオ',
         date: '2020/4',
         tags: ['TypeScript', 'React', 'Next.js', 'Now'],
         body: () => (
@@ -18,10 +18,10 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         ),
     },
     {
+        title: () => 'Piccs',
         pinned: true,
         category: 'web',
         url: 'https://piccs.app',
-        title: () => 'Piccs',
         date: '2020/4',
         tags: [
             'PWA',
@@ -41,10 +41,10 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         ),
     },
     {
+        title: () => 'Vanilla Clipper',
         pinned: true,
         category: 'github',
-        url: 'https://github.com/vanilla-clipper',
-        title: () => 'Vanilla Clipper',
+        url: 'https://github.com/yarnaimo/vanilla-clipper',
         tags: ['TypeScript', 'Node.js', 'Puppeteer'],
         date: '2019/2',
         body: () => (
@@ -55,10 +55,10 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         ),
     },
     {
+        title: () => 'agrec',
         pinned: false,
         category: 'github',
-        url: 'https://github.com/agrec',
-        title: () => 'agrec',
+        url: 'https://github.com/yarnaimo/agrec',
         tags: ['TypeScript', 'Node.js', 'Slack'],
         date: '2020/3',
         body: () => (
@@ -68,10 +68,10 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         ),
     },
     {
+        title: () => 'ReinaInfo Next',
         pinned: false,
         category: 'web',
         url: 'https://reinainfo-next.web.app',
-        title: () => 'ReinaInfo Next',
         tags: [
             'PWA',
             'Firebase',
@@ -89,10 +89,10 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         ),
     },
     {
+        title: () => 'Sodafloat',
         pinned: false,
         category: 'github',
-        url: 'https://github.com/sodafloat',
-        title: () => 'Sodafloat',
+        url: 'https://github.com/yarnaimo/sodafloat',
         tags: ['Firebase', 'TypeScript', 'React', 'Next.js'],
         date: '2019/11',
         body: () => (
@@ -103,23 +103,23 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         ),
     },
     {
-        pinned: false,
-        category: 'music',
-        url: 'https://www.nicovideo.jp/watch/sm35196109',
         title: () => (
             <span css={{ fontSize: 14 }}>
                 駆け抜けるメドレーコラボレーションFINAL Classic
             </span>
         ),
+        pinned: false,
+        category: 'music',
+        url: 'https://www.nicovideo.jp/watch/sm35196109',
         tags: [],
         date: '2019/6',
         body: () => <p>26:18～ の最終パートで参加しました。 (制作は2017年)</p>,
     },
     {
+        title: () => 'PhotoHook',
         pinned: false,
         category: 'web',
         url: 'https://photohook-app.firebaseapp.com',
-        title: () => 'PhotoHook',
         tags: ['Firebase', 'TypeScript', 'React'],
         date: '2019/3',
         imageUrl: 'a',
