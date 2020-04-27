@@ -16,7 +16,7 @@ export const Title: FC<Props> = ({
     article,
     description = webConfig.description,
     path,
-    thumbUrl = `${webConfig.origin}/assets/summary-large.png`,
+    thumbUrl = `${webConfig.origin}/assets/icons/manifest-icon-512.png`,
 }) => {
     const url = path ? `${webConfig.origin}/${path}` : webConfig.origin
 
@@ -35,7 +35,7 @@ export const Title: FC<Props> = ({
             <meta property="og:title" content={fullTitle} />
             <meta property="og:image" content={thumbUrl} />
             <meta property="og:site_name" content={webConfig.appName} />
-            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:card" content="summary" />
             <meta name="twitter:site" content={`@${webConfig.screenName}`} />
             <meta name="twitter:creator" content={`@${webConfig.screenName}`} />
         </Head>
