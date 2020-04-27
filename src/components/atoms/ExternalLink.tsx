@@ -14,7 +14,7 @@ type Props = {
     href: string | null
 }
 
-const Link = styled.a<{
+const LinkBlock = styled.a<{
     noUnderline: boolean | undefined
     inheritColor: boolean | undefined
 }>(({ noUnderline, inheritColor }) => ({
@@ -31,7 +31,7 @@ export const ExternalLink: FC<Props> = ({
     ...props
 }) => {
     return href ? (
-        <Link
+        <LinkBlock
             href={href}
             target="_blank"
             rel="noopener noreferrer"
@@ -40,7 +40,7 @@ export const ExternalLink: FC<Props> = ({
             {...props}
         >
             {props.children}
-        </Link>
+        </LinkBlock>
     ) : (
         <span {...props}>{props.children}</span>
     )

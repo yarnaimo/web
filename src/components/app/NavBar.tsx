@@ -147,7 +147,7 @@ const Item: FC<{
                 <ItemLabelBlock {...{ active }}>{label}</ItemLabelBlock>
 
                 <Link href={path} passHref>
-                    <a css={{ ...css.absoluteFit }}></a>
+                    <a aria-label={label} css={{ ...css.absoluteFit }}></a>
                 </Link>
             </ItemBlock>
         </Ripple>
@@ -201,6 +201,7 @@ export const NavBar: FC<Props> = ({}) => {
                 ))}
 
                 <NavFab
+                    aria-label="ツイートする"
                     background={color.sky()}
                     onClick={() =>
                         openTweetDialog(webConfig.origin, webConfig.longAppName)

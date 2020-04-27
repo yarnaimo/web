@@ -4,7 +4,7 @@ import {} from 'rmwc'
 import { color, glow } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { Solid } from '../blocks/Flex'
-import { FIconC } from './FIcon'
+import { FIconRounded } from './FIcon'
 
 // const gradient = gradientFn(180, '55%')(color.pinkv(0.4), color.pinkv(0.85))
 
@@ -34,7 +34,7 @@ type Props = {
 export const Heading2Icon: FC<Props> = memo(({ icon, children }) => {
     return (
         <Solid ai="center" css={{ ...css.margin({ y: 12 }) }}>
-            <FIconC
+            <FIconRounded
                 {...{
                     icon,
                     size: 32,
@@ -45,7 +45,7 @@ export const Heading2Icon: FC<Props> = memo(({ icon, children }) => {
                     transform: css.translate({ x: -2 }),
                     boxShadow: glow(color.orange(0.15)),
                 }}
-            ></FIconC>
+            ></FIconRounded>
 
             <TextBlock>{children}</TextBlock>
         </Solid>

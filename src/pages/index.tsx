@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import React, { FC, memo } from 'react'
 import { MainLayout, perspective } from '../components/app/MainLayout'
 import { navAreaY } from '../components/app/NavBar'
-import { FIconBadge } from '../components/atoms/FIcon'
+import { FIconBadge, FIconWithText } from '../components/atoms/FIcon'
 import { Heading2Icon } from '../components/atoms/Heading2'
 import { Slash } from '../components/atoms/Slash'
 import { ContainerCard } from '../components/blocks/Container'
@@ -63,23 +63,20 @@ const MainCard: FC<{}> = memo(({}) => {
                     <FIconBadge
                         href="https://twitter.com/yarnaimo"
                         {...iconPropMap.twitter}
-                    >
-                        Twitter
-                    </FIconBadge>
+                        label="Twitter"
+                    ></FIconBadge>
 
                     <FIconBadge
                         href="https://github.com/yarnaimo"
                         {...iconPropMap.github}
-                    >
-                        GitHub
-                    </FIconBadge>
+                        label="GitHub"
+                    ></FIconBadge>
 
                     <FIconBadge
                         href="https://qiita.com/yarnaimo"
                         {...iconPropMap.qiita}
-                    >
-                        Qiita
-                    </FIconBadge>
+                        label="Qiita"
+                    ></FIconBadge>
                 </Solid>
 
                 <Divider></Divider>
@@ -117,7 +114,7 @@ const MainCard: FC<{}> = memo(({}) => {
                 </p>
 
                 <Solid>
-                    <IListItem
+                    <FIconWithText
                         icon="calendar"
                         large
                         background={color.orange(0.25)}
@@ -125,9 +122,9 @@ const MainCard: FC<{}> = memo(({}) => {
                         css={{ ...css.margin({ y: 8 }) }}
                     >
                         1998 年
-                    </IListItem>
+                    </FIconWithText>
 
-                    <IListItem
+                    <FIconWithText
                         icon="home"
                         large
                         background={color.brown(0.2)}
@@ -135,10 +132,10 @@ const MainCard: FC<{}> = memo(({}) => {
                         css={{ ...css.margin({ y: 8, left: 24 }) }}
                     >
                         大阪周辺
-                    </IListItem>
+                    </FIconWithText>
                 </Solid>
 
-                <IListItem
+                <FIconWithText
                     icon="heart"
                     large
                     background={color.pinkv(0.1)}
@@ -149,7 +146,7 @@ const MainCard: FC<{}> = memo(({}) => {
                     <Slash></Slash>アイマス <small>(ミリオン: 高坂海美)</small>
                     <Slash></Slash>音楽 <small>(MONACA・大原ゆい子 など)</small>
                     <Slash></Slash>鉄道 <small>(信号・保安装置)</small> など
-                </IListItem>
+                </FIconWithText>
             </PageSectionCentered>
 
             <Divider></Divider>
@@ -208,11 +205,17 @@ const HomePage: NextPage<Props> = ({}) => {
                 <Title title={null} path={null}></Title>
 
                 <HeroImageOuter z={-8}>
-                    <FullWidthImage src="assets/hero.svg"></FullWidthImage>
+                    <FullWidthImage
+                        alt=""
+                        src="assets/hero.svg"
+                    ></FullWidthImage>
                 </HeroImageOuter>
 
                 <HeroImageOuter z={-24}>
-                    <FullWidthImage src="assets/hero-1.svg"></FullWidthImage>
+                    <FullWidthImage
+                        alt=""
+                        src="assets/hero-1.svg"
+                    ></FullWidthImage>
                 </HeroImageOuter>
 
                 <div

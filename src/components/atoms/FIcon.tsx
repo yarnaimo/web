@@ -58,7 +58,9 @@ export const FIcon: FC<FIconProps> = memo(
     },
 )
 
-const FIconCBlock = styled(Solid)<{
+//
+
+const FIconRoundedBlock = styled(Solid)<{
     size: number
     background?: string
     foreground?: string
@@ -80,14 +82,14 @@ const FIconCBlock = styled(Solid)<{
     }),
 )
 
-type FIconCProps = {
+type FIconRoundedProps = {
     icon: string
     size: number
     background?: string
     foreground?: string
 }
 
-export const FIconC: FC<FIconCProps> = ({
+export const FIconRounded: FC<FIconRoundedProps> = ({
     icon,
     size,
     background,
@@ -97,7 +99,7 @@ export const FIconC: FC<FIconCProps> = ({
     const innerSize = size * 0.6
 
     return (
-        <FIconCBlock
+        <FIconRoundedBlock
             {...{
                 size,
                 background,
@@ -106,12 +108,62 @@ export const FIconC: FC<FIconCProps> = ({
             {...props}
         >
             <FIcon {...{ icon, size: innerSize - (innerSize % 2) }}></FIcon>
-        </FIconCBlock>
+        </FIconRoundedBlock>
     )
 }
 
+//
+
+const FIconWithTextBlock = styled('div')<{ large?: boolean }>(
+    {
+        position: 'relative',
+        ...css.padding({ left: 44 }),
+    },
+    ({ large }) => ({ ...css.margin({ y: large ? 6 : 4 }) }),
+)
+
+type FIconWithTextProps = {
+    icon: string
+    large?: boolean
+    background?: string
+    foreground?: string
+}
+
+export const FIconWithText: FC<FIconWithTextProps> = ({
+    icon,
+    large,
+    background,
+    foreground,
+    children,
+    ...props
+}) => {
+    return (
+        <FIconWithTextBlock large={large} {...props}>
+            <FIconRounded
+                {...{
+                    icon,
+                    size: large ? 24 : 18,
+                    background,
+                    foreground,
+                }}
+                css={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: 14,
+                    transform: 'translate(-50%, -50%)',
+                }}
+            ></FIconRounded>
+
+            <span>{children}</span>
+        </FIconWithTextBlock>
+    )
+}
+
+//
+
 type FIconBadgeProps = {
     href?: string
+    label: string
     icon: string
     background?: string
     foreground?: string
@@ -119,10 +171,10 @@ type FIconBadgeProps = {
 
 export const FIconBadge: FC<FIconBadgeProps> = ({
     href,
+    label,
     icon,
     background,
     foreground,
-    children,
     ...props
 }) => {
     return (
@@ -136,12 +188,13 @@ export const FIconBadge: FC<FIconBadgeProps> = ({
         >
             {href && (
                 <ExternalLink
+                    aria-label={label}
                     href={href}
                     css={{ ...css.absoluteFit }}
                 ></ExternalLink>
             )}
 
-            <FIconC
+            <FIconRounded
                 {...{
                     icon,
                     size: 32,
@@ -149,7 +202,7 @@ export const FIconBadge: FC<FIconBadgeProps> = ({
                     foreground,
                 }}
                 {...props}
-            ></FIconC>
+            ></FIconRounded>
 
             <div
                 css={{
@@ -158,7 +211,7 @@ export const FIconBadge: FC<FIconBadgeProps> = ({
                     color: color.black(0.5),
                 }}
             >
-                {children}
+                {label}
             </div>
         </SolidColumn>
     )

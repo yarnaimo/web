@@ -6,7 +6,7 @@ import { css } from '../../services/view/css'
 import { iconPropMap } from '../../services/view/icon'
 import { AppChip, ChipsContainer } from '../atoms/Chip'
 import { ExternalLink } from '../atoms/ExternalLink'
-import { FIcon, FIconC } from '../atoms/FIcon'
+import { FIcon, FIconRounded } from '../atoms/FIcon'
 import { ContainerCard } from '../blocks/Container'
 import { LiquidColumn, Solid } from '../blocks/Flex'
 
@@ -55,6 +55,7 @@ export const WorkCard: FC<WorkCardProps> = ({
             <ContainerCard>
                 {url && (
                     <ExternalLink
+                        aria-label={title}
                         href={url}
                         css={{ ...css.absoluteFit, zIndex: 1 }}
                     ></ExternalLink>
@@ -81,12 +82,12 @@ export const WorkCard: FC<WorkCardProps> = ({
                         ...css.margin({ top: 12, bottom: 8 }),
                     }}
                 >
-                    <FIconC
+                    <FIconRounded
                         {...{ size: 24, ...iconPropMap[category] }}
                         css={{
                             transform: css.translate({ x: -1 }),
                         }}
-                    ></FIconC>
+                    ></FIconRounded>
 
                     <LiquidColumn css={{ ...css.margin({ left: 12 }) }}>
                         <h2
