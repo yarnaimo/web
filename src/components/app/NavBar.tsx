@@ -60,7 +60,7 @@ const MainBlock = styled(Solid)({
     position: 'relative',
 
     justifyContent: 'center',
-    ailgnItems: 'center',
+    alignItems: 'center',
     ...css.padding({ left: itemWidth * 0.25, right: itemWidth * 0.25 }),
     opacity: 1,
     background: color.white(),
