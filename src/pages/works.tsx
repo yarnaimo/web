@@ -10,10 +10,10 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         pinned: true,
         category: 'web',
         date: '2020/4',
-        tags: ['TypeScript', 'React', 'Next.js', 'Now'],
+        tags: ['TypeScript', 'React', 'Next.js', 'Vercel (Now)'],
         body: () => (
             <p>
-                このサイトです。パララックスはJSを使わずCSSのみで実装しました。
+                このサイトです。マテリアルデザインをベースに丸みを持たせたデザインにしました。トップページのパララックスはJSを使わずCSSのみで実装しています。
             </p>
         ),
     },
@@ -32,7 +32,7 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
             'TensorFlow',
             'Stripe',
         ],
-        imageUrl: 'a',
+        imageFilename: 'thumb-piccs.png',
         body: () => (
             <p>
                 声優・アニメ・アーティストなどの情報を逃さずチェックできるWebアプリです。
@@ -81,7 +81,7 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
             'TensorFlow',
         ],
         date: '2019/11',
-        imageUrl: 'a',
+        imageFilename: 'thumb-reinainfo-next.png',
         body: () => (
             <p>
                 上田麗奈さん非公式infoのv2です。機械学習を使った自動リツイートや、スケジュール・チケットなどのお知らせツイートを行い、サイトではそれらを一覧表示しています。スケジュールのOGP画像はPuppeteerで自動生成しています。
@@ -122,7 +122,6 @@ const workItems: (WorkCardProps & { body: () => ReactNode })[] = [
         url: 'https://photohook-app.firebaseapp.com',
         tags: ['Firebase', 'TypeScript', 'React'],
         date: '2019/3',
-        imageUrl: 'a',
         body: () => (
             <p>
                 Webページ上の画像をGoogleフォトに一括アップロードするツールです。

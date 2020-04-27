@@ -36,14 +36,14 @@ export type WorkCardProps = {
     title: () => ReactNode
     date: string
     tags: string[]
-    imageUrl?: string
+    imageFilename?: string
     url?: string
 }
 
 export const WorkCard: FC<WorkCardProps> = ({
     pinned,
     url,
-    imageUrl,
+    imageFilename,
     category,
     title,
     date,
@@ -61,14 +61,14 @@ export const WorkCard: FC<WorkCardProps> = ({
                     ></ExternalLink>
                 )}
 
-                {imageUrl && (
+                {imageFilename && (
                     <ImageOuterBlock>
                         <ImageBlock>
                             <img
-                                src={imageUrl}
+                                src={`/assets/images/${imageFilename}`}
                                 css={{
                                     ...css.absoluteFit,
-                                    objectFit: 'cover',
+                                    objectFit: 'contain',
                                 }}
                             ></img>
                         </ImageBlock>
