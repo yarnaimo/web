@@ -4,8 +4,8 @@
     <g transform="matrix(1,0,0,1,-1513,0)">
         <g id="iPhone-XS" serif:id="iPhone XS" transform="matrix(1,0,0,0.630542,263,0)">
             <rect x="1250" y="0" width="375" height="812" style="fill:none;"/>
-            <g transform="matrix(0.25,0,0,0.396484,1094.5,110.619)">
-                <circle cx="1844" cy="61" r="28" style="fill:white;"/>
+            <g transform="matrix(0.428571,0,0,0.679688,788.214,31.4922)">
+                <circle cx="1844" cy="61" r="28" style="fill:rgb(246,126,143);"/>
             </g>
         </g>
     </g>

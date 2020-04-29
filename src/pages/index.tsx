@@ -110,7 +110,7 @@ const MainCard: FC<{}> = memo(({}) => {
                 </div>
 
                 <p css={{ textAlign: 'center' }}>
-                    個人で Web サービスなどを作っています。
+                    個人でWebサービスなどを作っています。
                 </p>
 
                 <Solid>
@@ -211,10 +211,17 @@ const HomePage: NextPage<Props> = ({}) => {
                     ></FullWidthImage>
                 </HeroImageOuter>
 
-                <HeroImageOuter z={-24}>
+                <HeroImageOuter z={-32}>
                     <FullWidthImage
                         alt=""
                         src="assets/hero-1.svg"
+                    ></FullWidthImage>
+                </HeroImageOuter>
+
+                <HeroImageOuter z={-24}>
+                    <FullWidthImage
+                        alt=""
+                        src="assets/hero-2.svg"
                     ></FullWidthImage>
                 </HeroImageOuter>
 
