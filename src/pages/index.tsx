@@ -119,7 +119,10 @@ const MainCard: FC<{}> = memo(({}) => {
                         background={'transparent'}
                         foreground={color.orange(1)}
                         // foreground={color.orange(1)}
-                        css={{ ...css.margin({ y: 8 }) }}
+                        css={{
+                            ...css.margin({ y: 8 }),
+                            ...css.padding({ left: 36 }),
+                        }}
                     >
                         1998 年
                     </FIconWithText>
@@ -131,7 +134,10 @@ const MainCard: FC<{}> = memo(({}) => {
                         background={'transparent'}
                         foreground={color.brown(1)}
                         // foreground={color.brown(1)}
-                        css={{ ...css.margin({ y: 8, left: 24 }) }}
+                        css={{
+                            ...css.margin({ y: 8, left: 24 }),
+                            ...css.padding({ left: 36 }),
+                        }}
                     >
                         大阪周辺
                     </FIconWithText>
