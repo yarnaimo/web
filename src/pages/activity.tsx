@@ -111,7 +111,7 @@ const Activity = ({ items }: Props) => {
 
     return (
         <MainLayout>
-            <Title title={'Works'} path={'works'}></Title>
+            <Title title={'Activity'} path={'activity'}></Title>
 
             {workItems.map((item, i) => (
                 <WorkCard {...item} key={i}>
