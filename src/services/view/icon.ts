@@ -8,7 +8,7 @@ export const iconPropMap = {
     },
     github: {
         icon: 'github',
-        background: color.black(0.5),
+        background: color.black(0.525),
         foreground: color.white(),
     },
     qiita: {

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import React, { FC, memo } from 'react'
-import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { navAreaY } from './NavBar'
 
@@ -24,7 +23,8 @@ const MainLayoutBlock = styled('main')<{
         perspectiveOrigin: '50% 50%',
     },
     ({ lightBrown }) => ({
-        background: lightBrown ? color.lightBrown() : color.white(),
+        background:
+            'linear-gradient(315deg, hsl(175 100% 90% / 0.1), hsl(39deg 100% 90% / 10%))',
     }),
 )
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Fab, FabProps, ThemeProvider } from 'rmwc'
+import { Fab, FabProps, ThemeProvider } from 'rmwc/dist'
 import { color, shadows } from '../../services/view/color'
 import { css } from '../../services/view/css'
 

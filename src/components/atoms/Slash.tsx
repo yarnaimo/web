@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react'
-import {} from 'rmwc'
+import {} from 'rmwc/dist'
 import { css } from '../../services/view/css'
 
 type Props = {}

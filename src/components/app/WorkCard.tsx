@@ -1,14 +1,14 @@
 import styled from '@emotion/styled'
 import React, { FC, ReactNode } from 'react'
-import { Ripple } from 'rmwc'
+import { Ripple } from 'rmwc/dist'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { iconPropMap } from '../../services/view/icon'
 import { AppChip, ChipsContainer } from '../atoms/Chip'
 import { ExternalLink } from '../atoms/ExternalLink'
-import { FIcon, FIconRounded } from '../atoms/FIcon'
+import { FIconRounded } from '../atoms/FIcon'
 import { ContainerCard } from '../blocks/Container'
-import { LiquidColumn, Solid } from '../blocks/Flex'
+import { Solid } from '../blocks/Flex'
 
 const ImageOuterBlock = styled('div')({
     zIndex: 2,
@@ -32,9 +32,9 @@ const ImageBlock = styled('div')({
 
 export type WorkCardProps = {
     pinned?: boolean
-    category: 'web' | 'github' | 'music'
+    category: 'web' | 'github' | 'qiita' | 'music'
     title: () => ReactNode
-    date: string
+    meta: () => ReactNode
     tags: string[]
     imageFilename?: string
     url?: string
@@ -46,7 +46,7 @@ export const WorkCard: FC<WorkCardProps> = ({
     imageFilename,
     category,
     title,
-    date,
+    meta,
     tags,
     children,
 }) => {
@@ -57,7 +57,7 @@ export const WorkCard: FC<WorkCardProps> = ({
                     <ExternalLink
                         aria-label={title}
                         href={url}
-                        css={{ ...css.absoluteFit, zIndex: 1 }}
+                        css={{ ...css.absoluteFit, zIndex: 0 }}
                     ></ExternalLink>
                 )}
 
@@ -76,23 +76,31 @@ export const WorkCard: FC<WorkCardProps> = ({
                 )}
 
                 <Solid
-                    ai="center"
                     css={{
                         position: 'relative',
-                        ...css.margin({ top: 12, bottom: 8 }),
+                        pointerEvents: 'none',
+                        zIndex: 1,
                     }}
                 >
                     <FIconRounded
                         {...{ size: 24, ...iconPropMap[category] }}
                         css={{
+                            ...css.margin({ top: 18 }),
                             transform: css.translate({ x: -1 }),
                         }}
                     ></FIconRounded>
 
-                    <LiquidColumn css={{ ...css.margin({ left: 12 }) }}>
+                    <div
+                        css={{
+                            ...css.margin({
+                                left: 12,
+                                y: 8,
+                            }),
+                        }}
+                    >
                         <h2
                             css={{
-                                ...css.margin({ y: 2 }),
+                                ...css.margin({ y: 8 }),
 
                                 lineHeight: 1.4,
                                 fontSize: 16,
@@ -102,12 +110,46 @@ export const WorkCard: FC<WorkCardProps> = ({
                             {title()}
                         </h2>
 
-                        <span css={{ fontSize: 12, color: color.black(0.5) }}>
-                            {date}
-                        </span>
-                    </LiquidColumn>
+                        <div
+                            css={{
+                                ...css.margin({ y: 8 }),
+                                fontSize: 12,
+                                color: color.black(0.5),
+                            }}
+                        >
+                            {meta()}
+                        </div>
 
-                    {pinned && (
+                        {!!tags.length && (
+                            <div
+                                css={{
+                                    ...css.margin({
+                                        y: 10,
+                                        left: -2,
+                                    }),
+                                }}
+                            >
+                                <ChipsContainer>
+                                    {tags.map((t, i) => (
+                                        <AppChip key={i}>{t}</AppChip>
+                                    ))}
+                                </ChipsContainer>
+                            </div>
+                        )}
+
+                        <div
+                            css={{
+                                pointerEvents: 'auto',
+                                ...css.margin({
+                                    y: 8,
+                                }),
+                            }}
+                        >
+                            {children}
+                        </div>
+                    </div>
+
+                    {/* {pinned && (
                         <FIcon
                             icon="star"
                             size={16}
@@ -118,31 +160,16 @@ export const WorkCard: FC<WorkCardProps> = ({
                             }}
                             // css={{ position: 'absolute', top: 10, right: 10 }}
                         ></FIcon>
-                    )}
+                    )} */}
                 </Solid>
 
-                {!!tags.length && (
-                    <div
-                        css={{
-                            ...css.margin({ y: 8 }),
-                            ...css.padding({ left: 34 }),
-                        }}
-                    >
-                        <ChipsContainer>
-                            {tags.map((t, i) => (
-                                <AppChip key={i}>{t}</AppChip>
-                            ))}
-                        </ChipsContainer>
-                    </div>
-                )}
-
-                <div
+                {/* <div
                     css={{
-                        ...css.padding({ left: 36 }),
+                        position: 'relative',
+                        pointerEvents: 'none',
+                        zIndex: 1,
                     }}
-                >
-                    {children}
-                </div>
+                ></div> */}
             </ContainerCard>
         </Ripple>
     )

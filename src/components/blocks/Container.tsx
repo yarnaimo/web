@@ -16,7 +16,7 @@ export const Container = styled.div({
     width: '70%',
     maxWidth: 520,
     margin: '0px auto',
-    ...css.padding({ top: 0, bottom: 2 }),
+    // ...css.padding({ top: 0, bottom: 2 }),
     overflow: 'hidden',
 
     [css.responsive.isMobile]: {
@@ -32,7 +32,7 @@ export const ContainerCard = styled(Container)({
     ...css.padding({ x: 20 }),
     borderRadius: 16,
 
-    boxShadow: shadows.containerCard(color.black(0.08)),
+    boxShadow: shadows.containerCard(color.black(0.35)),
     background: color.white(),
 })
 

@@ -1,4 +1,4 @@
-/*! modern-normalize v0.6.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*! modern-normalize v0.7.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
 Document
@@ -101,7 +101,8 @@ code,
 kbd,
 samp,
 pre {
-    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; /* 1 */
+    font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono',
+        Menlo, monospace; /* 1 */
     font-size: 1em; /* 2 */
 }
 
@@ -197,14 +198,6 @@ button:-moz-focusring,
 [type='reset']:-moz-focusring,
 [type='submit']:-moz-focusring {
     outline: 1px dotted ButtonText;
-}
-
-/**
-Correct the padding in Firefox.
-*/
-
-fieldset {
-    padding: 0.35em 0.75em 0.625em;
 }
 
 /**

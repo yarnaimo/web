@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import React, { FC, memo } from 'react'
-import {} from 'rmwc'
 import { color, glow } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { Solid } from '../blocks/Flex'
@@ -21,7 +20,7 @@ import { FIconRounded } from './FIcon'
 // })
 
 const TextBlock = styled('h2')({
-    ...css.margin({ left: 12, y: 0 }),
+    ...css.margin({ left: 7.5, y: 0 }),
 
     fontSize: 20,
     transform: 'translateY(-0.5px)',
@@ -38,7 +37,7 @@ export const Heading2Icon: FC<Props> = memo(({ icon, children }) => {
                 {...{
                     icon,
                     size: 32,
-                    background: color.orange(0.25),
+                    // background: color.orange(0.25),
                     foreground: color.orange(),
                 }}
                 css={{

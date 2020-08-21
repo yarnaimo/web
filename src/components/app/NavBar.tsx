@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FC, memo } from 'react'
-import { Ripple } from 'rmwc'
+import { Ripple } from 'rmwc/dist'
 import { openTweetDialog } from '../../services/twitter/helper'
 import { color, glow, shadows } from '../../services/view/color'
 import { css, transition } from '../../services/view/css'
@@ -65,7 +65,7 @@ const MainBlock = styled(Solid)({
     opacity: 1,
     background: color.white(),
     borderRadius: navRadius,
-    boxShadow: shadows.navbarDeep(color.black(0.1)),
+    boxShadow: shadows.navbarDeep(color.black(0.35)),
 })
 
 const ItemBlock = styled(SolidColumn)<{ active: boolean }>({
@@ -121,7 +121,7 @@ const ItemLabelBlock = styled('span')<{ active: boolean }>(
     {
         ...css.margin({ top: 4 }),
         fontSize: 11.5,
-        fontFamily: 'Josefin Sans',
+        fontFamily: 'Cabin',
         fontWeight: 'bold',
         transform: 'translateY(2px)',
         ...ItemLabelBlockTr,
@@ -156,8 +156,8 @@ const Item: FC<{
 
 const items = [
     { path: '/', icon: 'home', label: 'Home' },
-    { path: '/works', icon: 'grid', label: 'Works' },
-    { path: '/blog', icon: 'feather', label: 'Blog' },
+    { path: '/activity', icon: 'activity', label: 'Activity' },
+    // { path: '/blog', icon: 'feather', label: 'Blog' },
     // {path:'/',label:'Home'},
     // {path:'/',label:'Home'},
 ]

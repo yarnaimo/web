@@ -1,9 +1,14 @@
 import styled from '@emotion/styled'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
-import { Solid } from '../blocks/Flex'
 
-export const AppChip = styled(Solid)({
+export const AppChip = styled('li')({
+    pointerEvents: 'auto',
+
+    flexDirection: 'row',
+    flexGrow: 0,
+    flexShrink: 0,
+
     display: 'inline-flex',
     alignItems: 'center',
     height: 20,
@@ -15,6 +20,8 @@ export const AppChip = styled(Solid)({
     background: color.black(0.05),
 })
 
-export const ChipsContainer = styled('div')({
+export const ChipsContainer = styled('ul')({
+    listStyle: 'none',
     ...css.margin({ x: -4, y: -3 }),
+    ...css.padding({ x: 0 }),
 })

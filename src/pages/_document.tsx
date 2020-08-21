@@ -31,10 +31,6 @@ const DocumentHead: FC<{}> = ({}) => {
             <meta name="format-detection" content="telephone=no" />
             <meta name="mobile-web-app-capable" content="yes" />
             <meta name="theme-color" content="#ffffff" />
-            <meta
-                name="viewport"
-                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-            />
 
             {/* <link rel="manifest" href="/manifest.json" /> */}
             {/* <link rel="shortcut icon" href="/assets/icons/favicon.ico" /> */}
@@ -74,10 +70,10 @@ const DocumentHead: FC<{}> = ({}) => {
                 href="https://fonts.googleapis.com/css?family=Cabin:400,600&display=swap"
                 rel="stylesheet"
             />
-            <link
+            {/* <link
                 href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap"
                 rel="stylesheet"
-            />
+            /> */}
             <link
                 href="https://fonts.googleapis.com/icon?family=Material+Icons"
                 rel="stylesheet"

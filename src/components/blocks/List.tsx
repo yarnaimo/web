@@ -19,10 +19,7 @@ type IListItemProps = {
     foreground?: string
 }
 
-export const IListItem: FC<IListItemProps> = ({
-    icon = 'chevron-right',
-    ...props
-}) => {
+export const IListItem: FC<IListItemProps> = ({ icon = 'flag', ...props }) => {
     return (
         <IListItemBlock>
             <FIconWithText {...{ icon }} {...props}></FIconWithText>

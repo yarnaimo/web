@@ -22,10 +22,13 @@ export const themeColor = (theme: string) => `var(--mdc-theme-${theme})`
 export const color = {
     transparent: () => 'transparent',
     white: hsl(0, 100, 100),
+    bgWhite: hsl(0, 0, 99.25),
     black: hsl(0, 0, 0),
     wblack: hsl(33, 12, 23),
-    brown: hsl(35, 41, 61),
-    lightBrown: hsl(35, 55, 94),
+    brown: hsl(35, 37, 61),
+    lightBrown: hsl(38, 55, 94),
+
+    homeBg: hsl(0, 0, 98.75),
 
     lightGreen: hsl(71, 81, 61),
     lime: hsl(61, 81, 60),
@@ -41,7 +44,7 @@ export const color = {
     primaryD: hsl(169, 74, 50),
 
     // pink: hsl(3, 77, 75), hsla(353, 79%, 66%, 1) 352, 85, 65 hsl(354, 100%, 65%)
-    pinkv: hsl(352, 90, 62),
+    pinkv: hsl(352, 90, 64),
     pink: hsl(356, 77, 64),
     pinkL: hsl(356, 77, 69),
     orange: hsl(39, 99, 63),
@@ -69,13 +72,16 @@ export const shadowFn = (x: number, y: number, b: number, s: number) => (
 
 export const shadows = {
     // navbar: shadowFn(0, 2, 12, -2),
-    navbarDeep: shadowFn(0, 6, 21, -2),
+    navbarDeep: shadowFn(0, 9, 24, -18),
+    // navbarDeep: shadowFn(0, 6, 21, -2),
 
+    icon: shadowFn(0, 16, 32, -32),
     card: shadowFn(0, 3, 15, -2),
     cardHovered: shadowFn(0, 3, 20, -1),
-    containerCard: shadowFn(0, 4, 32, -2),
+    containerCard: shadowFn(0, 6, 16, -13),
+    // containerCard: shadowFn(0, 4, 32, -2),
 
     dialog: shadowFn(0, 9, 33, 1),
 }
 
-export const glow = shadowFn(0, 0, 15, 0)
+export const glow = shadowFn(0, 0, 20, -8)

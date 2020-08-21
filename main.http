@@ -1,0 +1,2 @@
+GET https://api.github.com/users/yarnaimo/repos?sort=pushed
+Accept: application/vnd.github.mercy-preview+json

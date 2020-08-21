@@ -73,8 +73,8 @@ const FIconRoundedBlock = styled(Solid)<{
     },
     ({
         size: _size,
-        background = color.black(0.125),
-        foreground = color.white(),
+        background, // = color.black(0.125),
+        foreground, // = color.white(),
     }) => ({
         ...css.size(_size, _size),
         background,
@@ -117,7 +117,7 @@ export const FIconRounded: FC<FIconRoundedProps> = ({
 const FIconWithTextBlock = styled('div')<{ large?: boolean }>(
     {
         position: 'relative',
-        ...css.padding({ left: 44 }),
+        ...css.padding({ left: 40 }),
     },
     ({ large }) => ({ ...css.margin({ y: large ? 6 : 4 }) }),
 )
@@ -142,7 +142,7 @@ export const FIconWithText: FC<FIconWithTextProps> = ({
             <FIconRounded
                 {...{
                     icon,
-                    size: large ? 24 : 18,
+                    size: large ? 24 : 20,
                     background,
                     foreground,
                 }}

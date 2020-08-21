@@ -6,7 +6,7 @@ import { navAreaY } from '../components/app/NavBar'
 import { FIconBadge, FIconWithText } from '../components/atoms/FIcon'
 import { Heading2Icon } from '../components/atoms/Heading2'
 import { Slash } from '../components/atoms/Slash'
-import { ContainerCard } from '../components/blocks/Container'
+import { Container } from '../components/blocks/Container'
 import { Divider } from '../components/blocks/Divider'
 import { Solid, SolidColumn } from '../components/blocks/Flex'
 import { IListItem, UnorderedList } from '../components/blocks/List'
@@ -22,39 +22,37 @@ const HeroWidth = 'min(100vw, 411px)'
 const heroRatio = 328 / 375
 const heroRatioP = `${heroRatio * 100}%`
 
-const HeroImageOuter = styled('div')<{ z: number }>(
-    {
-        ...css.absoluteFit,
-        left: '50%',
-        width: HeroWidth,
-        transformStyle: 'preserve-3d',
+const Z = styled('div')<{ z: number }>(({ z }) => {
+    const scale = z / -perspective + 1
+    return {
+        position: 'absolute',
+        top: navAreaY * scale,
+        transform: `translateX(-50%) translateZ(${z}px) scale(${scale})`,
+    }
+})
 
-        [css.responsive.isMobile]: {
-            top: 0,
-        },
+const HeroImageOuter = styled(Z)({
+    ...css.absoluteFit,
+    left: '50%',
+    width: HeroWidth,
+    transformStyle: 'preserve-3d',
+
+    [css.responsive.isMobile]: {
+        top: 0,
     },
-    ({ z }) => {
-        const scale = z / -perspective + 1
-        return {
-            top: navAreaY * scale,
-            transform: `translateX(-50%) translateZ(${z}px) scale(${scale})`,
-        }
-    },
-)
+})
 
 export const PageSectionCentered = styled(PageSection)({
     alignItems: 'center',
-    maxWidth: 304,
-    ...css.margin({ x: 'auto' }),
 }).withComponent(SolidColumn)
 
 const FullWidthImage = styled('img')({ width: '100%' })
 
 const MainCard: FC<{}> = memo(({}) => {
     return (
-        <ContainerCard
+        <Container
             css={{
-                ...css.margin({ top: 0 }),
+                ...css.margin({ y: 4 }),
                 borderRadius: 24,
             }}
         >
@@ -110,15 +108,17 @@ const MainCard: FC<{}> = memo(({}) => {
                 </div>
 
                 <p css={{ textAlign: 'center' }}>
-                    個人でWebサービスなどを作っています。
+                    Webサービスの開発などを行っています。
                 </p>
 
-                <Solid>
+                <Solid css={{ ...css.margin({ top: 4 }) }}>
                     <FIconWithText
                         icon="calendar"
                         large
-                        background={color.orange(0.25)}
+                        // background={color.orange(1)}
+                        background={'transparent'}
                         foreground={color.orange(1)}
+                        // foreground={color.orange(1)}
                         css={{ ...css.margin({ y: 8 }) }}
                     >
                         1998 年
@@ -127,8 +127,10 @@ const MainCard: FC<{}> = memo(({}) => {
                     <FIconWithText
                         icon="home"
                         large
-                        background={color.brown(0.2)}
+                        // background={color.brown(1)}
+                        background={'transparent'}
                         foreground={color.brown(1)}
+                        // foreground={color.brown(1)}
                         css={{ ...css.margin({ y: 8, left: 24 }) }}
                     >
                         大阪周辺
@@ -138,8 +140,10 @@ const MainCard: FC<{}> = memo(({}) => {
                 <FIconWithText
                     icon="heart"
                     large
-                    background={color.pinkv(0.1)}
-                    foreground={color.pinkv(0.7)}
+                    // background={color.pinkv(1)}
+                    background={'transparent'}
+                    foreground={color.pinkv(1)}
+                    // foreground={color.pinkv(0.7)}
                     css={{ ...css.margin({ y: 8 }) }}
                 >
                     声優 <small>(上田麗奈)</small>
@@ -157,7 +161,7 @@ const MainCard: FC<{}> = memo(({}) => {
                 <UnorderedList>
                     {[
                         <>HTML / CSS</>,
-                        <b>Web デザイン</b>,
+                        <b>UIデザイン</b>,
                         <>
                             JavaScript / <b>TypeScript</b>
                         </>,
@@ -190,52 +194,100 @@ const MainCard: FC<{}> = memo(({}) => {
                     <IListItem>Affinity Designer</IListItem>
                 </UnorderedList>
             </PageSection>
-        </ContainerCard>
+        </Container>
     )
 })
 
 const HomePage: NextPage<Props> = ({}) => {
     return (
         <MainLayout lightBrown>
+            <Title title={null} path={null}></Title>
+
+            {/* <Z
+                z={-32}
+                css={{
+                    // position: 'fixed',
+                    right: '-200vw',
+                    top: '-150vh',
+                    width: 192,
+                    height: 192,
+                    borderRadius: '50%',
+                    background: hsl(197, 50, 83)(),
+                }}
+            ></Z>
+
+            <Z
+                z={-32}
+                css={{
+                    // position: 'fixed',
+                    top: 'unset',
+                    left: '-200vw',
+                    bottom: '-100vw',
+                    width: 128,
+                    height: 128,
+                    borderRadius: '50%',
+                    background: hsl(357, 50, 83)(),
+                }}
+            ></Z> */}
+
             <SolidColumn
+                ai="center"
                 css={{
                     width: '100%',
+                    // ...css.margin({ y: 36 }),
                 }}
             >
-                <Title title={null} path={null}></Title>
+                {/* <HeroImageOuter z={-8}>
+                <FullWidthImage alt="" src="assets/hero.svg"></FullWidthImage>
+            </HeroImageOuter>
 
-                <HeroImageOuter z={-8}>
-                    <FullWidthImage
-                        alt=""
-                        src="assets/hero.svg"
-                    ></FullWidthImage>
-                </HeroImageOuter>
+            <HeroImageOuter z={-32}>
+                <FullWidthImage alt="" src="assets/hero-1.svg"></FullWidthImage>
+            </HeroImageOuter> */}
 
-                <HeroImageOuter z={-32}>
-                    <FullWidthImage
-                        alt=""
-                        src="assets/hero-1.svg"
-                    ></FullWidthImage>
-                </HeroImageOuter>
-
-                <HeroImageOuter z={-24}>
+                {/* <HeroImageOuter z={-24}>
                     <FullWidthImage
                         alt=""
                         src="assets/hero-2.svg"
                     ></FullWidthImage>
-                </HeroImageOuter>
+                </HeroImageOuter> */}
 
+                {/* <div
+                css={{
+                    width: HeroWidth,
+
+                    '&:before': {
+                        content: '""',
+                        display: 'block',
+                        paddingTop: heroRatioP,
+                    },
+                }}
+            ></div> */}
+
+                {/* <Solid
+                    ai="center"
+                    jc="center"
+                    css={{
+                        ...css.size(148, 148),
+                        borderRadius: '50%',
+                        border: `solid 2px ${color.black(0.05)}`,
+                    }}
+                > */}
                 <div
                     css={{
-                        width: HeroWidth,
-
-                        '&:before': {
-                            content: '""',
-                            display: 'block',
-                            paddingTop: heroRatioP,
-                        },
+                        ...css.size(120, 120),
+                        ...css.margin({ top: 44 }),
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                        // boxShadow: shadows.icon(color.black(0.5)),
                     }}
-                ></div>
+                >
+                    <img
+                        src="assets/icons/manifest-icon-512.png"
+                        css={{ ...css.size('100%', '100%') }}
+                    ></img>
+                </div>
+                {/* </Solid> */}
 
                 <MainCard></MainCard>
             </SolidColumn>

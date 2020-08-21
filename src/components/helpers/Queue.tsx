@@ -1,6 +1,6 @@
 import { createDialogQueue } from '@rmwc/dialog'
 import { createSnackbarQueue } from '@rmwc/snackbar'
-import { DialogQueueInput } from 'rmwc'
+import { DialogQueueInput } from 'rmwc/dist'
 
 export const dialogQueue = createDialogQueue() as {
     alert: (dialog: DialogQueueInput) => Promise<any>
