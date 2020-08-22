@@ -289,6 +289,7 @@ const HomePage: NextPage<Props> = ({}) => {
                     }}
                 >
                     <img
+                        alt="icon"
                         src="assets/icons/manifest-icon-512.png"
                         css={{ ...css.size('100%', '100%') }}
                     ></img>
