@@ -81,11 +81,17 @@ const ItemBlock = styled(SolidColumn)<{ active: boolean }>({
     userSelect: 'none',
 
     '&:before': {
-        display: 'none',
+        background: color.orange(1),
+        // display: 'none',
     },
     '&:after': {
-        background: color.orange(0.5),
+        background: color.orange(1),
     },
+})
+
+const ItemBlockInner = styled(SolidColumn)({
+    justifyContent: 'center',
+    alignItems: 'center',
 })
 
 const ItemIconBlockTr = transition(
@@ -140,14 +146,21 @@ const Item: FC<{
     return (
         <Ripple primary>
             <ItemBlock {...{ active }}>
-                <ItemIconBlock {...{ active }}>
-                    <FIcon {...{ icon, size: iconSize }}></FIcon>
-                </ItemIconBlock>
-
-                <ItemLabelBlock {...{ active }}>{label}</ItemLabelBlock>
-
                 <Link href={path} passHref>
-                    <a aria-label={label} css={{ ...css.absoluteFit }}></a>
+                    <a
+                        aria-label={label}
+                        css={{ textDecoration: 'none!important' }}
+                    >
+                        <ItemBlockInner>
+                            <ItemIconBlock {...{ active }}>
+                                <FIcon {...{ icon, size: iconSize }}></FIcon>
+                            </ItemIconBlock>
+
+                            <ItemLabelBlock {...{ active }}>
+                                {label}
+                            </ItemLabelBlock>
+                        </ItemBlockInner>
+                    </a>
                 </Link>
             </ItemBlock>
         </Ripple>
