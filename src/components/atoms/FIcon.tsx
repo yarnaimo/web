@@ -48,7 +48,12 @@ export const FIcon: FC<FIconProps> = memo(
                 {...props}
                 css={[
                     (props as any).css,
-                    { display: 'flex', width: _size, height: _size },
+                    {
+                        display: 'flex',
+                        width: _size,
+                        height: _size,
+                        pointerEvents: 'none',
+                    },
                 ]}
                 dangerouslySetInnerHTML={{
                     __html,
