@@ -32,7 +32,7 @@ const ImageBlock = styled('div')({
 
 export type WorkCardProps = {
     pinned?: boolean
-    category: 'web' | 'github' | 'qiita' | 'music'
+    category: 'web' | 'github' | 'qiita' | 'music' | 'twitter'
     title: () => ReactNode
     meta: () => ReactNode
     tags: string[]

@@ -1,9 +1,12 @@
+import { dayjs } from '../core/date'
+
 export type QiitaItemEntry = {
     type: 'qiita'
-    data: QiitaItem
+    date: string
+    data: QiitaItemData
 }
 
-interface QiitaItem {
+export interface QiitaItemData {
     rendered_body: string
     body: string
     coediting: boolean
@@ -55,13 +58,17 @@ interface Group {
     url_name: string
 }
 
-export const getQiitaitems = async () => {
+export const getQiitaEntries = async () => {
     const data = await fetch(
         'https://qiita.com/api/v2/users/yarnaimo/items?per_page=100',
     )
-    const json = (await data.json()) as QiitaItem[]
+    const json = (await data.json()) as QiitaItemData[]
 
     return json.map(
-        (item): QiitaItemEntry => ({ type: 'qiita' as const, data: item }),
+        (data): QiitaItemEntry => ({
+            type: 'qiita' as const,
+            date: dayjs(data.created_at).toISOString(),
+            data,
+        }),
     )
 }

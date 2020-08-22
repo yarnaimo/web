@@ -1,36 +1,40 @@
 import styled from '@emotion/styled'
 import { P } from 'lifts'
 import { GetStaticProps } from 'next'
-import React, { PropsWithChildren } from 'react'
+import React, { ComponentProps, PropsWithChildren } from 'react'
 import { MainLayout } from '../components/app/MainLayout'
 import { WorkCard } from '../components/app/WorkCard'
 import { FIcon } from '../components/atoms/FIcon'
 import { Title } from '../components/helpers/Title'
 import { dayjs } from '../services/core/date'
 import { R } from '../services/core/fp'
-import { getRepos, RepoEntry } from '../services/github/repos'
-import { getQiitaitems, QiitaItemEntry } from '../services/qiita/items'
+import { getRepoEntries, RepoEntry } from '../services/github/repos'
+import { getLinkEntries, LinkEntry } from '../services/microcms/links'
+import { getQiitaEntries, QiitaItemEntry } from '../services/qiita/items'
 import { css } from '../services/view/css'
 
-type Props = { items: (RepoEntry | QiitaItemEntry)[] }
+const formatDate = (date: string) => dayjs(date).format('YYYY/M/D')
+
+type Entry = RepoEntry | QiitaItemEntry | LinkEntry
+
+type Props = { entries: Entry[] }
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-    const repos = await getRepos()
-    const qiitaItems = await getQiitaitems()
+    const [repos, qiitaItems, links] = await Promise.all([
+        getRepoEntries(),
+        getQiitaEntries(),
+        getLinkEntries(),
+    ])
 
     const sorted = P(
-        [...repos, ...qiitaItems],
+        [...repos, ...qiitaItems, ...links],
 
-        R.sortBy((item) => {
-            return item.type === 'repo'
-                ? dayjs(item.data.pushed_at)
-                : dayjs(item.data.created_at)
-        }),
+        R.sortBy((entry) => entry.date),
         R.reverse(),
     )
 
     return {
-        props: { items: sorted },
+        props: { entries: sorted },
         revalidate: 60 * 30,
         //     process.env.NODE_ENV === 'production' ? 60 * 30 : undefined,
     }
@@ -63,60 +67,90 @@ const MetaWithIcon = ({
     </span>
 )
 
-const Activity = ({ items }: Props) => {
-    const workItems = items.map((item) => {
-        if (item.type === 'repo') {
-            const date = dayjs(item.data.pushed_at).format('YYYY/M/D')
-            return {
-                pinned: false,
-                category: 'github' as const,
-                title: () => item.data.full_name,
-                meta: () => (
-                    <>
-                        <MetaWithIcon icon="git-commit">{date}</MetaWithIcon>
-                        <MetaWithIcon icon="star">
-                            {item.data.stargazers_count} stars
-                        </MetaWithIcon>
-                    </>
-                ),
-                tags: item.data.topics,
-                body: () =>
-                    item.data.description && (
-                        <Description>{item.data.description}</Description>
-                    ),
-                imageFilename: undefined,
-                url: item.data.html_url,
-            }
-        } else {
-            const date = dayjs(item.data.created_at).format('YYYY/M/D')
-            return {
-                pinned: false,
-                category: 'qiita' as const,
-                title: () => item.data.title,
-                meta: () => (
-                    <>
-                        <MetaWithIcon icon="clock">{date}</MetaWithIcon>
-                        <MetaWithIcon icon="thumbs-up">
-                            {item.data.likes_count} LGTM
-                        </MetaWithIcon>
-                    </>
-                ),
-                tags: item.data.tags.map((t) => t.name),
-                body: () => <></>,
-                imageFilename: undefined,
-                url: item.data.url,
-            }
-        }
-    })
+const RepoCard = ({ date, data }: RepoEntry) => {
+    const props: ComponentProps<typeof WorkCard> = {
+        pinned: false,
+        category: 'github' as const,
+        title: () => data.full_name,
+        meta: () => (
+            <>
+                <MetaWithIcon icon="git-commit">
+                    {formatDate(date)}
+                </MetaWithIcon>
+                <MetaWithIcon icon="star">
+                    {data.stargazers_count} stars
+                </MetaWithIcon>
+            </>
+        ),
+        tags: data.topics,
+        imageFilename: undefined,
+        url: data.html_url,
+    }
 
+    return (
+        <WorkCard {...props}>
+            {data.description && <Description>{data.description}</Description>}
+        </WorkCard>
+    )
+}
+
+const QiitaItemCard = ({ date, data }: QiitaItemEntry) => {
+    const props: ComponentProps<typeof WorkCard> = {
+        pinned: false,
+        category: 'qiita' as const,
+        title: () => data.title,
+        meta: () => (
+            <>
+                <MetaWithIcon icon="clock">{formatDate(date)}</MetaWithIcon>
+                <MetaWithIcon icon="thumbs-up">
+                    {data.likes_count} LGTM
+                </MetaWithIcon>
+            </>
+        ),
+        tags: data.tags.map((t) => t.name),
+        imageFilename: undefined,
+        url: data.url,
+    }
+
+    return <WorkCard {...props}></WorkCard>
+}
+
+const LinkCard = ({ date, data }: LinkEntry) => {
+    const props: ComponentProps<typeof WorkCard> = {
+        pinned: false,
+        category: data.type[0],
+        title: () => data.title,
+        meta: () => (
+            <>
+                <MetaWithIcon icon="clock">{formatDate(date)}</MetaWithIcon>
+            </>
+        ),
+        tags: data.tags?.split(' ') ?? [],
+        imageFilename: undefined,
+        url: data.url,
+    }
+
+    return <WorkCard {...props}>{data.body}</WorkCard>
+}
+
+const EntryCard = ({ entry }: { entry: Entry }) => {
+    switch (entry.type) {
+        case 'repo':
+            return <RepoCard {...entry}></RepoCard>
+        case 'qiita':
+            return <QiitaItemCard {...entry}></QiitaItemCard>
+        case 'link':
+            return <LinkCard {...entry}></LinkCard>
+    }
+}
+
+const Activity = ({ entries }: Props) => {
     return (
         <MainLayout>
             <Title title={'Activity'} path={'activity'}></Title>
 
-            {workItems.map((item, i) => (
-                <WorkCard {...item} key={i}>
-                    {item.body()}
-                </WorkCard>
+            {entries.map((entry, i) => (
+                <EntryCard entry={entry} key={i}></EntryCard>
             ))}
         </MainLayout>
     )
