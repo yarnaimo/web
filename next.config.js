@@ -4,6 +4,7 @@ const withFonts = require('next-fonts')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
 })
+const withTM = require('next-transpile-modules')(['rmwc/next'])
 
 const nextConfig = {
     distDir: '.next',
@@ -12,4 +13,4 @@ const nextConfig = {
     },
 }
 
-module.exports = withBundleAnalyzer(withFonts(nextConfig))
+module.exports = withBundleAnalyzer(withTM(withFonts(nextConfig)))

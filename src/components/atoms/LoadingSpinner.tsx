@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { CircularProgress } from 'rmwc/dist'
+import { CircularProgress } from 'rmwc/next'
 import { css } from '../../services/view/css'
 import { SolidColumn } from '../blocks/Flex'
 

@@ -1,7 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled'
 import { ComponentProps } from '@rmwc/types'
 import React, { forwardRef } from 'react'
-import {} from 'rmwc/dist'
+import {} from 'rmwc/next'
 import { filterForward } from '../../services/view/emotion'
 
 type Props = {

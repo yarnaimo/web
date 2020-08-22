@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { PropsWithChildren, ReactNode } from 'react'
-import { Ripple } from 'rmwc/dist'
+import { Ripple } from 'rmwc/next'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { iconPropMap } from '../../services/view/icon'

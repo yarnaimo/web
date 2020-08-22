@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react'
-import { Ripple } from 'rmwc/dist'
+import { Ripple } from 'rmwc/next'
 import { color } from '../../services/view/color'
 import { durationShort, transition } from '../../services/view/css'
 import { Solid } from '../blocks/Flex'

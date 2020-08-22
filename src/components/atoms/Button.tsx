@@ -1,4 +1,4 @@
-import { Button } from 'rmwc/dist'
+import { Button } from 'rmwc/next'
 
 // Button.defaultProps = { type: 'button' }
 

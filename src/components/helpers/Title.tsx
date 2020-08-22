@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { FC } from 'react'
-import {} from 'rmwc/dist'
+import {} from 'rmwc/next'
 import { webConfig } from '../../web-config'
 
 type Props = {
