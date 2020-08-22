@@ -1,14 +1,12 @@
-import { webEnv } from './services/core/web-env'
-
 const isDev = process.env.NODE_ENV !== 'production'
-const isBrowser = (process as any).browser as boolean
+const isBrowser = process.browser
 const port = parseInt(process.env.PORT || '3000', 10)
 
 export const webConfig = {
     isDev,
     isBrowser,
     port,
-    origin: isDev ? `https://localhost:${port}` : webEnv.hostingOrigin,
+    origin: isDev ? `https://localhost:${port}` : process.env.hostingOrigin!,
     appName: 'yarnaimo',
     longAppName: 'yarnaimo - ポートフォリオ',
     description: 'yarnaimo - ポートフォリオ',
