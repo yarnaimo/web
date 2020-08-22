@@ -4,6 +4,7 @@ import { Ripple } from 'rmwc/next'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { iconPropMap } from '../../services/view/icon'
+import { useInView } from '../../services/view/intersection-observer'
 import { AppChip, ChipsContainer } from '../atoms/Chip'
 import { ExternalLink } from '../atoms/ExternalLink'
 import { FIconRounded } from '../atoms/FIcon'
@@ -49,6 +50,7 @@ const WorkCardBody = ({
     meta,
     tags,
     children,
+    ...props
 }: PropsWithChildren<WorkCardProps>) => {
     return (
         <Solid
@@ -58,6 +60,7 @@ const WorkCardBody = ({
                 zIndex: 1,
                 userSelect: 'text',
             }}
+            {...props}
         >
             <FIconRounded
                 {...{
@@ -145,9 +148,14 @@ const WorkCardBody = ({
 }
 
 export const WorkCard = (props: PropsWithChildren<WorkCardProps>) => {
+    const [ref, inView, entry] = useInView({
+        rootMargin: '400px 0px',
+        triggerOnce: true,
+    })
+
     return (
         <Ripple>
-            <Card>
+            <Card ref={ref} style={inView ? undefined : { height: '100px' }}>
                 <ExternalLink
                     aria-label={props.title}
                     href={props.url ?? null}
@@ -174,7 +182,12 @@ export const WorkCard = (props: PropsWithChildren<WorkCardProps>) => {
                         </ImageOuterBlock>
                     )}
 
-                    <WorkCardBody {...props}></WorkCardBody>
+                    <WorkCardBody
+                        {...props}
+                        {...({
+                            style: inView ? undefined : { display: 'none' },
+                        } as any)}
+                    ></WorkCardBody>
                 </ExternalLink>
             </Card>
         </Ripple>
