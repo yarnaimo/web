@@ -65,7 +65,7 @@ const MainBlock = styled(Solid)({
     opacity: 1,
     background: color.white(),
     borderRadius: navRadius,
-    boxShadow: shadows.navbarDeep(color.black(0.35)),
+    boxShadow: shadows.navbarDeep(color.black(0.4)),
 })
 
 const ItemBlock = styled(SolidColumn)<{ active: boolean }>({

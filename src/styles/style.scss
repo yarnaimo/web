@@ -103,6 +103,10 @@ button {
     cursor: unset;
 }
 
+* {
+    outline: none;
+}
+
 .mdc-dialog-scroll-lock {
     overflow: unset;
 }
@@ -196,11 +200,21 @@ hr {
 //     -webkit-font-smoothing: antialiased;
 // }
 
-.mdc-ripple-surface::before {
-    background-color: rgba(0, 0, 0, 0.25);
+// .mdc-ripple-surface::before {
+//     background-color: rgba(0, 0, 0, 0.25);
+// }
+// .mdc-ripple-surface::after {
+//     background-color: rgba(0, 0, 0, 0.15);
+// }
+.mdc-ripple-surface:hover::before {
+    opacity: 0.02;
 }
-.mdc-ripple-surface::after {
-    background-color: rgba(0, 0, 0, 0.15);
+.mdc-ripple-surface.mdc-ripple-upgraded {
+    --mdc-ripple-fg-opacity: 0.02;
+}
+.mdc-ripple-surface.mdc-ripple-upgraded--background-focused::before,
+.mdc-ripple-surface:not(.mdc-ripple-upgraded):focus::before {
+    opacity: 0.04;
 }
 
 .mdc-icon-button svg,

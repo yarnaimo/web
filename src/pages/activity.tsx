@@ -5,6 +5,7 @@ import React, { ComponentProps, PropsWithChildren } from 'react'
 import { MainLayout } from '../components/app/MainLayout'
 import { WorkCard } from '../components/app/WorkCard'
 import { FIcon } from '../components/atoms/FIcon'
+import { Container } from '../components/blocks/Container'
 import { Title } from '../components/helpers/Title'
 import { dayjs } from '../services/core/date'
 import { R } from '../services/core/fp'
@@ -149,9 +150,11 @@ const Activity = ({ entries }: Props) => {
         <MainLayout>
             <Title title={'Activity'} path={'activity'}></Title>
 
-            {entries.map((entry, i) => (
-                <EntryCard entry={entry} key={i}></EntryCard>
-            ))}
+            <Container>
+                {entries.map((entry, i) => (
+                    <EntryCard entry={entry} key={i}></EntryCard>
+                ))}
+            </Container>
         </MainLayout>
     )
 }
