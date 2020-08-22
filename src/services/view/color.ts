@@ -25,7 +25,7 @@ export const color = {
     bgWhite: hsl(0, 0, 99.25),
     black: hsl(0, 0, 0),
     wblack: hsl(33, 12, 23),
-    brown: hsl(35, 37, 61),
+    brown: hsl(35, 35, 61),
     lightBrown: hsl(38, 55, 94),
 
     homeBg: hsl(0, 0, 98.75),

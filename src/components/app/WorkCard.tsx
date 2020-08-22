@@ -32,7 +32,7 @@ const ImageBlock = styled('div')({
 
 export type WorkCardProps = {
     pinned?: boolean
-    category: 'web' | 'github' | 'qiita' | 'music' | 'twitter'
+    category: 'web' | 'github' | 'qiita' | 'music' | 'twitter' | 'article'
     title: () => ReactNode
     meta: () => ReactNode
     tags: string[]
@@ -65,7 +65,7 @@ const WorkCardBody = ({
                     ...iconPropMap[category],
                 }}
                 css={{
-                    ...css.margin({ top: 18 }),
+                    ...css.margin({ top: 16 }),
                     transform: css.translate({ x: -1 }),
                 }}
             ></FIconRounded>

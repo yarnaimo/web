@@ -10,26 +10,27 @@ import { Title } from '../components/helpers/Title'
 import { dayjs } from '../services/core/date'
 import { R } from '../services/core/fp'
 import { getRepoEntries, RepoEntry } from '../services/github/repos'
+import { ArticleEntry, getArticleEntries } from '../services/microcms/articles'
 import { getLinkEntries, LinkEntry } from '../services/microcms/links'
 import { getQiitaEntries, QiitaItemEntry } from '../services/qiita/items'
 import { css } from '../services/view/css'
 
 const formatDate = (date: string) => dayjs(date).format('YYYY/M/D')
 
-type Entry = RepoEntry | QiitaItemEntry | LinkEntry
+type Entry = RepoEntry | QiitaItemEntry | LinkEntry | ArticleEntry
 
 type Props = { entries: Entry[] }
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-    const [repos, qiitaItems, links] = await Promise.all([
+    const entriesList = await Promise.all([
         getRepoEntries(),
         getQiitaEntries(),
         getLinkEntries(),
+        getArticleEntries(),
     ])
 
     const sorted = P(
-        [...repos, ...qiitaItems, ...links],
-
+        R.flatten(entriesList),
         R.sortBy((entry) => entry.date),
         R.reverse(),
     )
@@ -134,6 +135,24 @@ const LinkCard = ({ date, data }: LinkEntry) => {
     return <WorkCard {...props}>{data.body}</WorkCard>
 }
 
+const ArticleCard = ({ date, data }: ArticleEntry) => {
+    const props: ComponentProps<typeof WorkCard> = {
+        pinned: false,
+        category: 'article',
+        title: () => data.title,
+        meta: () => (
+            <>
+                <MetaWithIcon icon="clock">{formatDate(date)}</MetaWithIcon>
+            </>
+        ),
+        tags: data.tags?.split(' ') ?? [],
+        imageFilename: undefined,
+        url: `/activity/${data.id}`,
+    }
+
+    return <WorkCard {...props}>{data.body}</WorkCard>
+}
+
 const EntryCard = ({ entry }: { entry: Entry }) => {
     switch (entry.type) {
         case 'repo':
@@ -142,6 +161,8 @@ const EntryCard = ({ entry }: { entry: Entry }) => {
             return <QiitaItemCard {...entry}></QiitaItemCard>
         case 'link':
             return <LinkCard {...entry}></LinkCard>
+        case 'article':
+            return <ArticleCard {...entry}></ArticleCard>
     }
 }
 

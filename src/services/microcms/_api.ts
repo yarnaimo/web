@@ -12,7 +12,33 @@ const get = async <T>(path: string) => {
     return json as T
 }
 
-export const mcapi = { get }
+const getAll = async <T extends MCItemBase>(
+    path: string,
+    queries: string[] = [],
+) => {
+    const limit = 50
+    const orders = '-updatedAt'
+
+    const list: T[] = []
+
+    while (true) {
+        const qs = [
+            `limit=${limit}`,
+            `offset=${list.length}`,
+            `orders=${orders}`,
+            ...queries,
+        ].join('&')
+
+        const response = await mcapi.get<MCArrayResponse<T>>(`${path}?${qs}`)
+        list.push(...response.contents)
+
+        if (list.length === response.totalCount) {
+            return list
+        }
+    }
+}
+
+export const mcapi = { get, getAll }
 
 export type MCItemBase = {
     id: string
@@ -21,7 +47,7 @@ export type MCItemBase = {
     publishedAt: string
 }
 
-export type MCArrayResponse<T> = {
+export type MCArrayResponse<T extends MCItemBase> = {
     contents: T[]
     totalCount: number
     offset: number

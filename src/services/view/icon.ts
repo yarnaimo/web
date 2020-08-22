@@ -26,4 +26,9 @@ export const iconPropMap = {
         background: color.pinkv(0.8),
         foreground: color.white(),
     },
+    article: {
+        icon: 'edit-3',
+        background: color.brown(),
+        foreground: color.white(),
+    },
 }

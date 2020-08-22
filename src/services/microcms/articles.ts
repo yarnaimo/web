@@ -1,9 +1,28 @@
-import { MCArrayResponse, MCItemBase } from './_api'
+import { dayjs } from '../core/date'
+import { mcapi, MCItemBase } from './_api'
 
-export type ArticleItem = MCItemBase & {
-    title: string
-    tags?: string
-    body: string
+export type ArticleEntry = {
+    type: 'article'
+    date: string
+    data: ArticleData
 }
 
-export type ArticlesResponse = MCArrayResponse<ArticleItem>
+export type ArticleData = MCItemBase & {
+    title: string
+    tags?: string
+    body?: string
+}
+
+export const getArticleEntries = async () => {
+    const response = await mcapi.getAll<ArticleData>('/articles', [
+        `fields=id,createdAt,updatedAt,publishedAt,title,tags`,
+    ])
+
+    return response.map(
+        (data): ArticleEntry => ({
+            type: 'article',
+            date: dayjs(data.updatedAt).toISOString(),
+            data,
+        }),
+    )
+}
