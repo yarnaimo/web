@@ -68,7 +68,11 @@ export const getQiitaEntries = async () => {
         (data): QiitaItemEntry => ({
             type: 'qiita' as const,
             date: dayjs(data.created_at).toISOString(),
-            data,
+            data: {
+                ...data,
+                rendered_body: data.rendered_body.slice(0, 200),
+                body: data.body.slice(0, 200),
+            },
         }),
     )
 }
