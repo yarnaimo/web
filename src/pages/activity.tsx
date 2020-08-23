@@ -69,100 +69,88 @@ const MetaWithIcon = ({
     </span>
 )
 
-const RepoCard = ({ date, data }: RepoEntry) => {
-    const props: ComponentProps<typeof WorkCard> = {
-        pinned: false,
-        category: 'github' as const,
-        title: () => data.full_name,
-        meta: () => (
-            <>
-                <MetaWithIcon icon="git-commit">
-                    {formatDate(date)}
-                </MetaWithIcon>
-                <MetaWithIcon icon="star">
-                    {data.stargazers_count} stars
-                </MetaWithIcon>
-            </>
-        ),
-        tags: data.topics,
-        imageFilename: undefined,
-        url: data.html_url,
-    }
-
-    return (
-        <WorkCard {...props}>
-            {data.description && <Description>{data.description}</Description>}
-        </WorkCard>
-    )
-}
-
-const QiitaItemCard = ({ date, data }: QiitaItemEntry) => {
-    const props: ComponentProps<typeof WorkCard> = {
-        pinned: false,
-        category: 'qiita' as const,
-        title: () => data.title,
-        meta: () => (
-            <>
-                <MetaWithIcon icon="clock">{formatDate(date)}</MetaWithIcon>
-                <MetaWithIcon icon="thumbs-up">
-                    {data.likes_count} LGTM
-                </MetaWithIcon>
-            </>
-        ),
-        tags: data.tags.map((t) => t.name),
-        imageFilename: undefined,
-        url: data.url,
-    }
-
-    return <WorkCard {...props}></WorkCard>
-}
-
-const LinkCard = ({ date, data }: LinkEntry) => {
-    const props: ComponentProps<typeof WorkCard> = {
-        pinned: false,
-        category: data.type[0],
-        title: () => data.title,
-        meta: () => (
-            <>
-                <MetaWithIcon icon="clock">{formatDate(date)}</MetaWithIcon>
-            </>
-        ),
-        tags: data.tags?.split(' ') ?? [],
-        imageFilename: undefined,
-        url: data.url,
-    }
-
-    return <WorkCard {...props}>{data.body}</WorkCard>
-}
-
-const ArticleCard = ({ date, data }: ArticleEntry) => {
-    const props: ComponentProps<typeof WorkCard> = {
-        pinned: false,
-        category: 'article',
-        title: () => data.title,
-        meta: () => (
-            <>
-                <MetaWithIcon icon="clock">{formatDate(date)}</MetaWithIcon>
-            </>
-        ),
-        tags: data.tags?.split(' ') ?? [],
-        imageFilename: undefined,
-        url: `/activity/${data.id}`,
-    }
-
-    return <WorkCard {...props}>{data.body}</WorkCard>
-}
-
-const EntryCard = ({ entry }: { entry: Entry }) => {
+const toWorkCardProps = (entry: Entry): ComponentProps<typeof WorkCard> => {
     switch (entry.type) {
         case 'repo':
-            return <RepoCard {...entry}></RepoCard>
+            return {
+                pinned: false,
+                category: 'github' as const,
+                title: () => entry.data.full_name,
+                meta: () => (
+                    <>
+                        <MetaWithIcon icon="git-commit">
+                            {formatDate(entry.date)}
+                        </MetaWithIcon>
+                        <MetaWithIcon icon="star">
+                            {entry.data.stargazers_count} stars
+                        </MetaWithIcon>
+                    </>
+                ),
+                tags: entry.data.topics,
+                imageFilename: undefined,
+                url: entry.data.html_url,
+                body: () =>
+                    entry.data.description && (
+                        <Description>{entry.data.description}</Description>
+                    ),
+            }
+
         case 'qiita':
-            return <QiitaItemCard {...entry}></QiitaItemCard>
+            return {
+                pinned: false,
+                category: 'qiita' as const,
+                title: () => entry.data.title,
+                meta: () => (
+                    <>
+                        <MetaWithIcon icon="clock">
+                            {formatDate(entry.date)}
+                        </MetaWithIcon>
+                        <MetaWithIcon icon="thumbs-up">
+                            {entry.data.likes_count} LGTM
+                        </MetaWithIcon>
+                    </>
+                ),
+                tags: entry.data.tags.map((t) => t.name),
+                imageFilename: undefined,
+                url: entry.data.url,
+                body: () => <></>,
+            }
+
         case 'link':
-            return <LinkCard {...entry}></LinkCard>
+            return {
+                pinned: false,
+                category: entry.data.type[0],
+                title: () => entry.data.title,
+                meta: () => (
+                    <>
+                        <MetaWithIcon icon="clock">
+                            {formatDate(entry.date)}
+                        </MetaWithIcon>
+                    </>
+                ),
+                tags: entry.data.tags?.split(' ') ?? [],
+                imageFilename: undefined,
+                url: entry.data.url,
+                body: () => entry.data.body,
+            }
+
         case 'article':
-            return <ArticleCard {...entry}></ArticleCard>
+            return {
+                pinned: false,
+                category: 'article',
+                title: () => entry.data.title,
+                meta: () => (
+                    <>
+                        <MetaWithIcon icon="clock">
+                            {formatDate(entry.date)}
+                        </MetaWithIcon>
+                    </>
+                ),
+                tags: entry.data.tags?.split(' ') ?? [],
+                imageFilename: undefined,
+                url: `/activity/${entry.data.id}`,
+                body: () => entry.data.body,
+            }
     }
 }
 
@@ -172,8 +160,12 @@ const Activity = ({ entries }: Props) => {
             <Title title={'Activity'} path={'activity'}></Title>
 
             <Container>
-                {entries.map((entry, i) => (
-                    <EntryCard entry={entry} key={i}></EntryCard>
+                {entries.map(toWorkCardProps).map((props, i) => (
+                    <WorkCard
+                        {...props}
+                        key={i}
+                        initialVisibility={i < 10}
+                    ></WorkCard>
                 ))}
             </Container>
         </MainLayout>

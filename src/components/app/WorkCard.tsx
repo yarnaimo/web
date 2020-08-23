@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { memo, ReactNode } from 'react'
 import { Ripple } from 'rmwc/next'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
@@ -32,6 +32,7 @@ const ImageBlock = styled('div')({
 })
 
 export type WorkCardProps = {
+    initialVisibility?: boolean
     pinned?: boolean
     category: 'web' | 'github' | 'qiita' | 'music' | 'twitter' | 'article'
     title: () => ReactNode
@@ -39,6 +40,7 @@ export type WorkCardProps = {
     tags: string[]
     imageFilename?: string
     url?: string
+    body: () => ReactNode
 }
 
 const WorkCardBody = ({
@@ -49,9 +51,9 @@ const WorkCardBody = ({
     title,
     meta,
     tags,
-    children,
+    body,
     ...props
-}: PropsWithChildren<WorkCardProps>) => {
+}: WorkCardProps) => {
     return (
         <Solid
             css={{
@@ -127,7 +129,7 @@ const WorkCardBody = ({
                         }),
                     }}
                 >
-                    {children}
+                    {body()}
                 </div>
             </div>
 
@@ -147,15 +149,16 @@ const WorkCardBody = ({
     )
 }
 
-export const WorkCard = (props: PropsWithChildren<WorkCardProps>) => {
+export const WorkCard = memo((props: WorkCardProps) => {
     const [ref, inView, entry] = useInView({
         rootMargin: '400px 0px',
         triggerOnce: true,
     })
+    const visible = props.initialVisibility || inView
 
     return (
         <Ripple>
-            <Card ref={ref} style={inView ? undefined : { height: '100px' }}>
+            <Card ref={ref} style={visible ? undefined : { height: '100px' }}>
                 <ExternalLink
                     aria-label={props.title}
                     href={props.url ?? null}
@@ -185,11 +188,11 @@ export const WorkCard = (props: PropsWithChildren<WorkCardProps>) => {
                     <WorkCardBody
                         {...props}
                         {...({
-                            style: inView ? undefined : { display: 'none' },
+                            style: visible ? undefined : { display: 'none' },
                         } as any)}
                     ></WorkCardBody>
                 </ExternalLink>
             </Card>
         </Ripple>
     )
-}
+})
