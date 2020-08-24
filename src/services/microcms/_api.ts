@@ -1,9 +1,10 @@
 const baseUrl = 'https://yarnaimo.microcms.io/api/v1'
 
-const get = async <T>(path: string) => {
+const get = async <T>(path: string, queries: string[] = []) => {
     const _path = path.startsWith('/') ? path.slice(1) : path
+    const qs = queries.length ? `?${queries.join('&')}` : ''
 
-    const response = await fetch(`${baseUrl}/${_path}`, {
+    const response = await fetch(`${baseUrl}/${_path}${qs}`, {
         headers: {
             'X-API-KEY': process.env.X_API_KEY!,
         },
@@ -22,14 +23,12 @@ const getAll = async <T extends MCItemBase>(
     const list: T[] = []
 
     while (true) {
-        const qs = [
+        const response = await mcapi.get<MCArrayResponse<T>>(path, [
             `limit=${limit}`,
             `offset=${list.length}`,
             `orders=${orders}`,
             ...queries,
-        ].join('&')
-
-        const response = await mcapi.get<MCArrayResponse<T>>(`${path}?${qs}`)
+        ])
         list.push(...response.contents)
 
         if (list.length === response.totalCount) {

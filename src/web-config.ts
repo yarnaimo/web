@@ -6,7 +6,9 @@ export const webConfig = {
     isDev,
     isBrowser,
     port,
-    origin: isDev ? `https://localhost:${port}` : process.env.hostingOrigin!,
+    origin: isDev
+        ? `https://localhost:${port}`
+        : process.env.hostingOrigin ?? window.location.origin,
     appName: 'yarnaimo',
     longAppName: 'yarnaimo - ポートフォリオ',
     description: 'yarnaimo - ポートフォリオ',

@@ -6,37 +6,19 @@ import { Ripple } from 'rmwc/next'
 import { openTweetDialog } from '../../services/twitter/helper'
 import { color, glow, shadows } from '../../services/view/color'
 import { css, transition } from '../../services/view/css'
-import { webConfig } from '../../web-config'
 import { FIcon } from '../atoms/FIcon'
 import { Solid, SolidColumn } from '../blocks/Flex'
 import { FixedFab } from './FixedFab'
 
 const navRadius = 20
 export const navHeight = 64
-export const navMarginY = 16
+export const navMarginY = 12
 export const navAreaY = navHeight + navMarginY * 2
 
 const itemWidth = 80
 const itemSideMargin = 4
 const iconOuterSize = 30
 const iconSize = 18
-
-export const NavSpacer = styled('div')({
-    height: navHeight + navMarginY * 2,
-})
-
-export const TopSpacer = styled(NavSpacer)({
-    display: 'block',
-    [css.responsive.isMobile]: {
-        display: 'none',
-    },
-})
-export const BottomSpacer = styled(NavSpacer)({
-    display: 'none',
-    [css.responsive.isMobile]: {
-        display: 'block',
-    },
-})
 
 const OuterBlock = styled(Solid)({
     position: 'fixed',
@@ -80,11 +62,11 @@ const ItemBlock = styled(SolidColumn)<{ active: boolean }>({
     cursor: 'pointer',
     userSelect: 'none',
 
-    '&:before': {
+    '&.mdc-ripple-surface::before': {
         background: color.orange(1),
         // display: 'none',
     },
-    '&:after': {
+    '&.mdc-ripple-surface::after': {
         background: color.orange(1),
     },
 })
@@ -217,7 +199,10 @@ export const NavBar: FC<Props> = ({}) => {
                     aria-label="ツイートする"
                     background={color.sky()}
                     onClick={() =>
-                        openTweetDialog(webConfig.origin, webConfig.longAppName)
+                        openTweetDialog(
+                            window.location.href.replace(/\/$/, ''),
+                            document.title,
+                        )
                     }
                     icon={<FIcon size={20} stroke={3} icon="twitter"></FIcon>}
                 ></NavFab>

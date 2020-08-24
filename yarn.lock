@@ -3101,7 +3101,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/dompurify@^2.0.3":
+"@types/dompurify@^2.0.2":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/dompurify/-/dompurify-2.0.3.tgz#dfd5601d7356dac8adf20ef23fd3a85359604e58"
   integrity sha512-sK52Cwj9nJh186Tt/My7WzCWsJlJWAtcUig1fp/7s7/T2t4xMgpNHYdgjXlCUsXpmGc1OZWPqUFpZ35o6xs5lQ==
@@ -7101,6 +7101,15 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
+isomorphic-dompurify@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-dompurify/-/isomorphic-dompurify-0.5.0.tgz#3c7da7c9af04848921ca1ddfc6ae11ace9567a59"
+  integrity sha512-atMTlFnWmxSSAP2OiuCAdPqlMRo5R1iErIKtdb2VHKNfDQOan8bd3CjVlLqFALtkEzUBfuUY294l3Nb15z0/bw==
+  dependencies:
+    "@types/dompurify" "^2.0.2"
+    dompurify "^2.0.12"
+    jsdom "^16.2.1"
+
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
@@ -7680,7 +7689,7 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsdom@^16.2.2:
+jsdom@^16.2.1, jsdom@^16.2.2:
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-16.4.0.tgz#36005bde2d136f73eee1a830c6d45e55408edddb"
   integrity sha512-lYMm3wYdgPhrl7pDcRmvzPhhrGVBeVhPIqeHjzeiHN3DFmD1RBpbExbi8vU7BJdH8VAZYovR8DMt0PNNDM7k8w==
@@ -8428,6 +8437,11 @@ mkdirp@^0.5.1, mkdirp@^0.5.3:
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   dependencies:
     minimist "^1.2.5"
+
+modern-css-reset@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/modern-css-reset/-/modern-css-reset-1.1.1.tgz#355944a01d3336a98e6a7fb027e458cc990b815e"
+  integrity sha512-lUkQHXyZNoehOrKqw5hMAw3wcUIWZrGDY8pdo8Nhh4sEhK1pObhVLTAFCDn5b3WraWo6et86m4h0Km7fuYILHg==
 
 modern-normalize@^0.7.0:
   version "0.7.0"
@@ -10962,6 +10976,11 @@ styled-jsx@3.3.0:
     string-hash "1.1.3"
     stylis "3.5.4"
     stylis-rule-sheet "0.0.10"
+
+stylis-plugin-extra-scope@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/stylis-plugin-extra-scope/-/stylis-plugin-extra-scope-0.2.1.tgz#9f6abfd49c587c29bbf47a16070c425da5d57417"
+  integrity sha512-sQ0PoUCp87EfQwH2sNnfXeUtHdz66Q6bxAgK+73EvNvyNlc+9JkTED6LZOZOaYKhPkHu4nw1ls4wD71VTWUQ2Q==
 
 stylis-rule-sheet@0.0.10:
   version "0.0.10"

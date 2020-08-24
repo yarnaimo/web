@@ -4,7 +4,7 @@ import React, { FC, memo, useMemo } from 'react'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { Solid, SolidColumn } from '../blocks/Flex'
-import { ExternalLink } from './ExternalLink'
+import { ABlank } from './A'
 
 type Options = {
     tag?: 'button' | 'div'
@@ -192,11 +192,11 @@ export const FIconBadge: FC<FIconBadgeProps> = ({
             }}
         >
             {href && (
-                <ExternalLink
+                <ABlank
                     aria-label={label}
                     href={href}
                     css={{ ...css.absoluteFit }}
-                ></ExternalLink>
+                ></ABlank>
             )}
 
             <FIconRounded

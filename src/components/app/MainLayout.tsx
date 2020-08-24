@@ -16,7 +16,7 @@ const MainLayoutBlock = styled('main')<{
         ...css.padding({ top: navAreaY, bottom: 0 }),
 
         [css.responsive.isMobile]: {
-            ...css.padding({ top: 0, bottom: navAreaY }),
+            ...css.padding({ top: 0, bottom: navAreaY + 8 }),
         },
 
         perspective,

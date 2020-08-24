@@ -1,22 +1,18 @@
+import '@rmwc/avatar/avatar.css'
+import '@rmwc/circular-progress/circular-progress.css'
+import '@rmwc/data-table/data-table.css'
+import 'material-components-web/dist/material-components-web.css'
+import 'modern-normalize/modern-normalize.css'
 import { AppType } from 'next/dist/next-server/lib/utils'
 import Head from 'next/head'
-import React, { FC } from 'react'
+import React from 'react'
 import { NavBar } from '../components/app/NavBar'
 import { PageTransition } from '../components/helpers/PageTransition'
-import '../styles/style.scss'
+import { GlobalStyle } from '../components/styles'
+// import '../styles/style.scss'
 import { webConfig } from '../web-config'
 
-const App: FC<{}> = ({ children }) => {
-    return (
-        <>
-            <NavBar></NavBar>
-
-            <PageTransition>{children}</PageTransition>
-        </>
-    )
-}
-
-export const MyApp: AppType = ({ Component, pageProps }) => {
+export const App: AppType = ({ Component, pageProps }) => {
     // useGA()
 
     return (
@@ -29,11 +25,14 @@ export const MyApp: AppType = ({ Component, pageProps }) => {
                 />
             </Head>
 
-            <App>
+            <GlobalStyle></GlobalStyle>
+
+            <NavBar></NavBar>
+            <PageTransition>
                 <Component {...pageProps} />
-            </App>
+            </PageTransition>
         </>
     )
 }
 
-export default MyApp
+export default App

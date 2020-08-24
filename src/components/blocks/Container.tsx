@@ -28,11 +28,11 @@ export const Container = styled.div({
 export const Card = styled.div({
     zIndex: 1,
     position: 'relative',
-    ...css.margin({ y: 24 }),
+    ...css.margin({ y: 20 }),
     ...css.padding({ x: 20 }),
     borderRadius: 16,
 
-    boxShadow: shadows.containerCard(color.black(0.4)),
+    boxShadow: shadows.containerCard(color.black(0.45)),
     background: color.white(),
 })
 

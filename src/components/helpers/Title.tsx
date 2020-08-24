@@ -5,6 +5,7 @@ import { webConfig } from '../../web-config'
 
 type Props = {
     title: string | null
+    appName?: string
     article?: boolean
     description?: string
     path: string | null
@@ -13,6 +14,7 @@ type Props = {
 
 export const Title: FC<Props> = ({
     title,
+    appName,
     article,
     description = webConfig.description,
     path,
@@ -21,7 +23,7 @@ export const Title: FC<Props> = ({
     const url = path ? `${webConfig.origin}/${path}` : webConfig.origin
 
     const fullTitle = title
-        ? `${title} | ${webConfig.appName}`
+        ? `${title} - ${appName ?? webConfig.appName}`
         : webConfig.longAppName
 
     return (

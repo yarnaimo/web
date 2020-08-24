@@ -2,18 +2,21 @@ import styled from '@emotion/styled'
 import { P } from 'lifts'
 import { GetStaticProps } from 'next'
 import React, { ComponentProps, PropsWithChildren } from 'react'
-import { MainLayout } from '../components/app/MainLayout'
-import { WorkCard } from '../components/app/WorkCard'
-import { FIcon } from '../components/atoms/FIcon'
-import { Container } from '../components/blocks/Container'
-import { Title } from '../components/helpers/Title'
-import { dayjs } from '../services/core/date'
-import { R } from '../services/core/fp'
-import { getRepoEntries, RepoEntry } from '../services/github/repos'
-import { ArticleEntry, getArticleEntries } from '../services/microcms/articles'
-import { getLinkEntries, LinkEntry } from '../services/microcms/links'
-import { getQiitaEntries, QiitaItemEntry } from '../services/qiita/items'
-import { css } from '../services/view/css'
+import { MainLayout } from '../../components/app/MainLayout'
+import { WorkCard } from '../../components/app/WorkCard'
+import { FIcon } from '../../components/atoms/FIcon'
+import { Container } from '../../components/blocks/Container'
+import { Title } from '../../components/helpers/Title'
+import { dayjs } from '../../services/core/date'
+import { R } from '../../services/core/fp'
+import { getRepoEntries, RepoEntry } from '../../services/github/repos'
+import {
+    ArticleEntry,
+    getArticleEntries,
+} from '../../services/microcms/articles'
+import { getLinkEntries, LinkEntry } from '../../services/microcms/links'
+import { getQiitaEntries, QiitaItemEntry } from '../../services/qiita/items'
+import { css } from '../../services/view/css'
 
 const formatDate = (date: string) => dayjs(date).format('YYYY/M/D')
 
@@ -75,7 +78,7 @@ const toWorkCardProps = (entry: Entry): ComponentProps<typeof WorkCard> => {
             return {
                 pinned: false,
                 category: 'github' as const,
-                title: () => entry.data.full_name,
+                title: entry.data.full_name,
                 meta: () => (
                     <>
                         <MetaWithIcon icon="git-commit">
@@ -99,7 +102,7 @@ const toWorkCardProps = (entry: Entry): ComponentProps<typeof WorkCard> => {
             return {
                 pinned: false,
                 category: 'qiita' as const,
-                title: () => entry.data.title,
+                title: entry.data.title,
                 meta: () => (
                     <>
                         <MetaWithIcon icon="clock">
@@ -113,14 +116,14 @@ const toWorkCardProps = (entry: Entry): ComponentProps<typeof WorkCard> => {
                 tags: entry.data.tags.map((t) => t.name),
                 imageFilename: undefined,
                 url: entry.data.url,
-                body: () => <></>,
+                body: () => null,
             }
 
         case 'link':
             return {
                 pinned: false,
                 category: entry.data.type[0],
-                title: () => entry.data.title,
+                title: entry.data.title,
                 meta: () => (
                     <>
                         <MetaWithIcon icon="clock">
@@ -138,7 +141,7 @@ const toWorkCardProps = (entry: Entry): ComponentProps<typeof WorkCard> => {
             return {
                 pinned: false,
                 category: 'article',
-                title: () => entry.data.title,
+                title: entry.data.title,
                 meta: () => (
                     <>
                         <MetaWithIcon icon="clock">
@@ -149,7 +152,7 @@ const toWorkCardProps = (entry: Entry): ComponentProps<typeof WorkCard> => {
                 tags: entry.data.tags?.split(' ') ?? [],
                 imageFilename: undefined,
                 url: `/activity/${entry.data.id}`,
-                body: () => entry.data.body,
+                body: () => null,
             }
     }
 }

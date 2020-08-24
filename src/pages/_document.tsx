@@ -6,6 +6,7 @@ import Document, {
     NextScript,
 } from 'next/document'
 import React, { FC } from 'react'
+import { Fonts } from '../components/styles'
 import { webConfig } from '../web-config'
 
 const DocumentHead: FC<{}> = ({}) => {
@@ -62,22 +63,7 @@ const DocumentHead: FC<{}> = ({}) => {
                 href="/assets/icons/apple-icon-120.png"
             />
 
-            <link
-                href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700&display=swap"
-                rel="stylesheet"
-            />
-            <link
-                href="https://fonts.googleapis.com/css?family=Cabin:400,600&display=swap"
-                rel="stylesheet"
-            />
-            {/* <link
-                href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap"
-                rel="stylesheet"
-            /> */}
-            {/* <link
-                href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                rel="stylesheet"
-            /> */}
+            <Fonts></Fonts>
         </Head>
     )
 }

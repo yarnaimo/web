@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import React, { memo, ReactNode } from 'react'
 import { Ripple } from 'rmwc/next'
 import { color } from '../../services/view/color'
 import { css } from '../../services/view/css'
 import { iconPropMap } from '../../services/view/icon'
 import { useInView } from '../../services/view/intersection-observer'
+import { A, ABlank } from '../atoms/A'
 import { AppChip, ChipsContainer } from '../atoms/Chip'
-import { ExternalLink } from '../atoms/ExternalLink'
 import { FIconRounded } from '../atoms/FIcon'
 import { Card } from '../blocks/Container'
 import { Solid } from '../blocks/Flex'
@@ -35,7 +36,7 @@ export type WorkCardProps = {
     initialVisibility?: boolean
     pinned?: boolean
     category: 'web' | 'github' | 'qiita' | 'music' | 'twitter' | 'article'
-    title: () => ReactNode
+    title: string
     meta: () => ReactNode
     tags: string[]
     imageFilename?: string
@@ -92,7 +93,7 @@ const WorkCardBody = ({
                         transform: 'translateY(-0.5px)',
                     }}
                 >
-                    {title()}
+                    {title}
                 </h2>
 
                 <div
@@ -149,6 +150,22 @@ const WorkCardBody = ({
     )
 }
 
+const WorkCardImage = (props: WorkCardProps) => {
+    return props.imageFilename ? (
+        <ImageOuterBlock>
+            <ImageBlock>
+                <img
+                    src={`/assets/images/${props.imageFilename}`}
+                    css={{
+                        ...css.absoluteFit,
+                        objectFit: 'contain',
+                    }}
+                ></img>
+            </ImageBlock>
+        </ImageOuterBlock>
+    ) : null
+}
+
 export const WorkCard = memo((props: WorkCardProps) => {
     const [ref, inView, entry] = useInView({
         rootMargin: '400px 0px',
@@ -156,42 +173,54 @@ export const WorkCard = memo((props: WorkCardProps) => {
     })
     const visible = props.initialVisibility || inView
 
+    const Content_ = (
+        <>
+            <WorkCardImage {...props}></WorkCardImage>
+
+            <WorkCardBody
+                {...props}
+                {...({
+                    style: visible ? undefined : { display: 'none' },
+                } as any)}
+            ></WorkCardBody>
+        </>
+    )
+
     return (
         <Ripple>
             <Card ref={ref} style={visible ? undefined : { height: '100px' }}>
-                <ExternalLink
-                    aria-label={props.title}
-                    href={props.url ?? null}
-                    inheritColor
-                    noUnderline
-                    css={{
-                        '&::before': {
-                            content: '""',
-                            ...css.absoluteFit,
-                        },
-                    }}
-                >
-                    {props.imageFilename && (
-                        <ImageOuterBlock>
-                            <ImageBlock>
-                                <img
-                                    src={`/assets/images/${props.imageFilename}`}
-                                    css={{
-                                        ...css.absoluteFit,
-                                        objectFit: 'contain',
-                                    }}
-                                ></img>
-                            </ImageBlock>
-                        </ImageOuterBlock>
-                    )}
-
-                    <WorkCardBody
-                        {...props}
-                        {...({
-                            style: visible ? undefined : { display: 'none' },
-                        } as any)}
-                    ></WorkCardBody>
-                </ExternalLink>
+                {props.category === 'article' ? (
+                    <Link href="/activity/[id]" as={props.url} passHref>
+                        <A
+                            aria-label={props.title}
+                            inheritColor
+                            noUnderline
+                            css={{
+                                '&::before': {
+                                    content: '""',
+                                    ...css.absoluteFit,
+                                },
+                            }}
+                        >
+                            {Content_}
+                        </A>
+                    </Link>
+                ) : (
+                    <ABlank
+                        aria-label={props.title}
+                        inheritColor
+                        noUnderline
+                        href={props.url}
+                        css={{
+                            '&::before': {
+                                content: '""',
+                                ...css.absoluteFit,
+                            },
+                        }}
+                    >
+                        {Content_}
+                    </ABlank>
+                )}
             </Card>
         </Ripple>
     )

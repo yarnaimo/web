@@ -33,17 +33,20 @@ export const color = {
     lightGreen: hsl(71, 81, 61),
     lime: hsl(61, 81, 60),
 
-    blue: hsl(203, 73, 53),
+    blue: hsl(203, 75, 53),
     lightBlue: hsl(203, 85, 60),
 
     sky: hsl(177, 62, 75),
     // blue: hsl(211, 41, 57),
+
+    codeBg: hsl(217, 21, 68),
 
     primaryL: hsl(75, 73, 81),
     primary: hsl(162, 63, 64),
     primaryD: hsl(169, 74, 50),
 
     // pink: hsl(3, 77, 75), hsla(353, 79%, 66%, 1) 352, 85, 65 hsl(354, 100%, 65%)
+    inlineCode: hsl(347, 87, 57),
     pinkv: hsl(352, 90, 64),
     pink: hsl(356, 77, 64),
     pinkL: hsl(356, 77, 69),
@@ -78,7 +81,7 @@ export const shadows = {
     icon: shadowFn(0, 16, 32, -32),
     card: shadowFn(0, 3, 15, -2),
     cardHovered: shadowFn(0, 3, 20, -1),
-    containerCard: shadowFn(0, 6, 16, -13),
+    containerCard: shadowFn(0, 5, 16, -13),
     // containerCard: shadowFn(0, 4, 32, -2),
 
     dialog: shadowFn(0, 9, 33, 1),
