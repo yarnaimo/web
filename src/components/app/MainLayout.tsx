@@ -13,10 +13,12 @@ const MainLayoutBlock = styled('main')<{
         overflowY: 'auto',
         height: '100%',
 
-        ...css.padding({ top: navAreaY, bottom: 0 }),
+        paddingTop: navAreaY,
+        paddingBottom: 0,
 
         [css.responsive.isMobile]: {
-            ...css.padding({ top: 0, bottom: navAreaY + 8 }),
+            paddingTop: 0,
+            paddingBottom: navAreaY + 8,
         },
 
         perspective,

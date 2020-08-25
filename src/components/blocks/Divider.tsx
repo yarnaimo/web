@@ -5,7 +5,7 @@ import { Solid } from './Flex'
 
 export const Divider = styled(Solid)({
     width: '100%',
-    ...css.margin({ y: 16 }),
+    ...css.marginBlock(16),
     justifyContent: 'center',
 
     '&:before': {

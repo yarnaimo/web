@@ -14,14 +14,14 @@ import { Solid } from '../blocks/Flex'
 
 const ImageOuterBlock = styled('div')({
     zIndex: 2,
-    ...css.margin({ x: -20 }),
+    ...css.marginInline(-20),
     width: css.calc('100% + 40px'),
     background: color.black(0.05),
 })
 
 const ImageBlock = styled('div')({
     position: 'relative',
-    ...css.margin({ x: 'auto' }),
+    ...css.marginInline('auto'),
     width: '80%',
     maxWidth: 280,
 
@@ -71,22 +71,20 @@ const WorkCardBody = ({
                     ...iconPropMap[category],
                 }}
                 css={{
-                    ...css.margin({ top: 16 }),
+                    marginTop: 16,
                     transform: css.translate({ x: -1 }),
                 }}
             ></FIconRounded>
 
             <div
                 css={{
-                    ...css.margin({
-                        left: 12,
-                        y: 8,
-                    }),
+                    ...css.marginBlock(8),
+                    marginLeft: 12,
                 }}
             >
                 <h2
                     css={{
-                        ...css.margin({ y: 8 }),
+                        ...css.marginBlock(8),
 
                         lineHeight: 1.4,
                         fontSize: 16,
@@ -98,7 +96,7 @@ const WorkCardBody = ({
 
                 <div
                     css={{
-                        ...css.margin({ y: 8 }),
+                        ...css.marginBlock(8),
                         fontSize: 12,
                         color: color.black(0.5),
                     }}
@@ -109,10 +107,8 @@ const WorkCardBody = ({
                 {!!tags.length && (
                     <div
                         css={{
-                            ...css.margin({
-                                y: 10,
-                                left: -2,
-                            }),
+                            ...css.marginBlock(10),
+                            marginLeft: -2,
                         }}
                     >
                         <ChipsContainer>
@@ -125,9 +121,7 @@ const WorkCardBody = ({
 
                 <div
                     css={{
-                        ...css.margin({
-                            y: 8,
-                        }),
+                        ...css.marginBlock(8),
                     }}
                 >
                     {body()}

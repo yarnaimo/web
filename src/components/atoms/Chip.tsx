@@ -12,8 +12,9 @@ export const AppChip = styled('li')({
     display: 'inline-flex',
     alignItems: 'center',
     height: 20,
-    ...css.margin({ x: 4, y: 3 }),
-    ...css.padding({ x: 8 }),
+    ...css.marginBlock(3),
+    ...css.marginInline(4),
+    ...css.paddingInline(8),
     borderRadius: 10,
     fontSize: 12,
 
@@ -22,6 +23,7 @@ export const AppChip = styled('li')({
 
 export const ChipsContainer = styled('ul')({
     listStyle: 'none',
-    ...css.margin({ x: -4, y: -3 }),
-    ...css.padding({ x: 0 }),
+    ...css.marginBlock(-3),
+    ...css.marginInline(-4),
+    ...css.paddingInline(0),
 })

@@ -20,7 +20,8 @@ import { FIconRounded } from './FIcon'
 // })
 
 const TextBlock = styled('h2')({
-    ...css.margin({ left: 7.5, y: 0 }),
+    ...css.marginBlock(0),
+    marginLeft: 7.5,
 
     fontSize: 20,
     transform: 'translateY(-0.5px)',
@@ -32,7 +33,7 @@ type Props = {
 
 export const Heading2Icon: FC<Props> = memo(({ icon, children }) => {
     return (
-        <Solid ai="center" css={{ ...css.margin({ y: 12 }) }}>
+        <Solid ai="center" css={{ ...css.marginBlock(12) }}>
             <FIconRounded
                 {...{
                     icon,

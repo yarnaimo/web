@@ -16,7 +16,6 @@ import {
 } from '../../services/microcms/articles'
 import { getLinkEntries, LinkEntry } from '../../services/microcms/links'
 import { getQiitaEntries, QiitaItemEntry } from '../../services/qiita/items'
-import { css } from '../../services/view/css'
 
 const formatDate = (date: string) => dayjs(date).format('YYYY/M/D')
 
@@ -60,7 +59,7 @@ const MetaWithIcon = ({
         css={{
             display: 'inline-flex',
             alignItems: 'center',
-            '&:not(:first-of-type)': { ...css.margin({ left: 12 }) },
+            '&:not(:first-of-type)': { marginLeft: 12 },
         }}
     >
         <FIcon

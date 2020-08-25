@@ -45,7 +45,7 @@ export const ArticleBody = (article: Props) => {
     ])
 
     return (
-        <div css={{ ...css.margin({ y: 16 }) }}>
+        <div css={{ ...css.marginBlock(16) }}>
             <h1>{article.title}</h1>
             <div dangerouslySetInnerHTML={{ __html: cleanHTML }}></div>
         </div>

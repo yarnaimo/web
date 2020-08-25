@@ -122,9 +122,9 @@ export const FIconRounded: FC<FIconRoundedProps> = ({
 const FIconWithTextBlock = styled('div')<{ large?: boolean }>(
     {
         position: 'relative',
-        ...css.padding({ left: 40 }),
+        paddingLeft: 40,
     },
-    ({ large }) => ({ ...css.margin({ y: large ? 6 : 4 }) }),
+    ({ large }) => ({ ...css.marginBlock(large ? 6 : 4) }),
 )
 
 type FIconWithTextProps = {
@@ -188,7 +188,7 @@ export const FIconBadge: FC<FIconBadgeProps> = ({
             css={{
                 position: 'relative',
                 width: 48,
-                ...css.margin({ x: 12 }),
+                ...css.marginInline(12),
             }}
         >
             {href && (
@@ -211,7 +211,7 @@ export const FIconBadge: FC<FIconBadgeProps> = ({
 
             <div
                 css={{
-                    ...css.margin({ top: 8 }),
+                    marginTop: 8,
                     fontSize: 11,
                     color: color.black(0.5),
                 }}

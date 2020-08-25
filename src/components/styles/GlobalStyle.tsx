@@ -86,7 +86,8 @@ const styles: CSSObject = {
     // },
 
     pre: {
-        ...css.padding({ x: 12, y: 8 }),
+        ...css.paddingBlock(8),
+        ...css.paddingInline(12),
         overflow: 'auto',
         borderRadius: 8,
         background: color.codeBg(0.08),
@@ -95,7 +96,7 @@ const styles: CSSObject = {
     '*:not(pre)': {
         '& > code, & > kbd, & > samp': {
             // borderRadius: 4,
-            ...css.margin({ x: 4 }),
+            ...css.marginInline(4),
             // ...css.padding({ x: 4, y: 1 }),
             // border: `solid 1px ${color.black(0.15)}`,
             transform: 'translateY(-1px)',
@@ -110,11 +111,10 @@ const styles: CSSObject = {
     },
 
     blockquote: {
-        marginLeft: 0,
-        marginRight: 0,
+        ...css.marginInline(0),
         borderLeft: `solid 3px ${color.codeBg(0.25)}`,
         paddingLeft: '1.25em',
-        ...css.padding({ y: 2 }),
+        ...css.paddingBlock(2),
     },
 
     '.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label': {

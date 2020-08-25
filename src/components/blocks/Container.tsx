@@ -15,7 +15,8 @@ import { css } from '../../services/view/css'
 export const Container = styled.div({
     width: '70%',
     maxWidth: 520,
-    margin: '0px auto',
+    ...css.marginBlock(0),
+    ...css.marginInline('auto'),
     // ...css.padding({ top: 0, bottom: 2 }),
     // overflow: 'hidden',
 
@@ -28,8 +29,8 @@ export const Container = styled.div({
 export const Card = styled.div({
     zIndex: 1,
     position: 'relative',
-    ...css.margin({ y: 20 }),
-    ...css.padding({ x: 20 }),
+    ...css.marginBlock(20),
+    ...css.paddingInline(20),
     borderRadius: 16,
 
     boxShadow: shadows.containerCard(color.black(0.45)),

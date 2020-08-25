@@ -24,7 +24,7 @@ const OuterBlock = styled(Solid)({
     position: 'fixed',
     zIndex: 4,
     width: '100%',
-    ...css.padding({ y: navMarginY }),
+    ...css.paddingBlock(navMarginY),
     top: 0,
     [css.responsive.isMobile]: {
         top: 'unset',
@@ -43,7 +43,7 @@ const MainBlock = styled(Solid)({
 
     justifyContent: 'center',
     alignItems: 'center',
-    ...css.padding({ left: itemWidth * 0.25, right: itemWidth * 0.25 }),
+    ...css.paddingInline(itemWidth * 0.25),
     opacity: 1,
     background: color.white(),
     borderRadius: navRadius,
@@ -53,7 +53,7 @@ const MainBlock = styled(Solid)({
 const ItemBlock = styled(SolidColumn)<{ active: boolean }>({
     height: navHeight,
     width: itemWidth,
-    ...css.margin({ x: itemSideMargin }),
+    ...css.marginInline(itemSideMargin),
     position: 'relative',
 
     justifyContent: 'center',
@@ -107,7 +107,7 @@ const ItemLabelBlockTr = transition('std', ['color'], [0.4])
 
 const ItemLabelBlock = styled('span')<{ active: boolean }>(
     {
-        ...css.margin({ top: 4 }),
+        marginTop: 4,
         fontSize: 11.5,
         fontFamily: 'Cabin',
         fontWeight: 'bold',

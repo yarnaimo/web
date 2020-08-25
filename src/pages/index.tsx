@@ -52,12 +52,12 @@ const MainCard: FC<{}> = memo(({}) => {
     return (
         <Container
             css={{
-                ...css.margin({ y: 4 }),
+                ...css.marginBlock(4),
                 borderRadius: 24,
             }}
         >
             <PageSectionCentered css={{ fontSize: 13 }}>
-                <Solid jc="space-between" css={{ ...css.margin({ y: 8 }) }}>
+                <Solid jc="space-between" css={{ ...css.marginBlock(8) }}>
                     <FIconBadge
                         href="https://twitter.com/yarnaimo"
                         {...iconPropMap.twitter}
@@ -82,7 +82,7 @@ const MainCard: FC<{}> = memo(({}) => {
                 <h1
                     css={{
                         fontSize: 18,
-                        ...css.margin({ y: 4 }),
+                        ...css.marginBlock(4),
                     }}
                 >
                     yarnaimo<Slash></Slash>
@@ -91,7 +91,7 @@ const MainCard: FC<{}> = memo(({}) => {
 
                 <div
                     css={{
-                        ...css.margin({ y: 8 }),
+                        ...css.marginBlock(8),
                         fontSize: 11,
                         color: color.black(0.5),
                     }}
@@ -120,8 +120,8 @@ const MainCard: FC<{}> = memo(({}) => {
                         foreground={color.orange(1)}
                         // foreground={color.orange(1)}
                         css={{
-                            ...css.margin({ y: 8 }),
-                            ...css.padding({ left: 36 }),
+                            ...css.marginBlock(8),
+                            paddingLeft: 36,
                         }}
                     >
                         1998 年
@@ -135,8 +135,9 @@ const MainCard: FC<{}> = memo(({}) => {
                         foreground={color.brown(1)}
                         // foreground={color.brown(1)}
                         css={{
-                            ...css.margin({ y: 8, left: 24 }),
-                            ...css.padding({ left: 36 }),
+                            ...css.marginBlock(8),
+                            marginLeft: 24,
+                            paddingLeft: 36,
                         }}
                     >
                         大阪周辺
@@ -150,7 +151,7 @@ const MainCard: FC<{}> = memo(({}) => {
                     background={'transparent'}
                     foreground={color.pinkv(1)}
                     // foreground={color.pinkv(0.7)}
-                    css={{ ...css.margin({ y: 8 }) }}
+                    css={{ ...css.marginBlock(8) }}
                 >
                     声優 <small>(上田麗奈)</small>
                     <Slash></Slash>アイマス <small>(ミリオン: 高坂海美)</small>
@@ -240,7 +241,7 @@ const HomePage: NextPage<Props> = ({}) => {
                 ai="center"
                 css={{
                     width: '100%',
-                    // ...css.margin({ y: 36 }),
+                    // ...css.marginBlock(36),
                 }}
             >
                 {/* <HeroImageOuter z={-8}>
@@ -282,7 +283,7 @@ const HomePage: NextPage<Props> = ({}) => {
                 <div
                     css={{
                         ...css.size(120, 120),
-                        ...css.margin({ top: 44 }),
+                        marginTop: 44,
                         borderRadius: '50%',
                         overflow: 'hidden',
                         // boxShadow: shadows.icon(color.black(0.5)),

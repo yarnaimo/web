@@ -131,13 +131,34 @@ const createSpacer = (type: 'margin' | 'padding' | 'border') => {
     }
 }
 
+const marginBlock = (value: string | number): CSSObject => ({
+    marginBlockStart: value,
+    marginBlockEnd: value,
+})
+const marginInline = (value: string | number): CSSObject => ({
+    marginInlineStart: value,
+    marginInlineEnd: value,
+})
+const paddingBlock = (value: string | number): CSSObject => ({
+    paddingBlockStart: value,
+    paddingBlockEnd: value,
+})
+const paddingInline = (value: string | number): CSSObject => ({
+    paddingInlineStart: value,
+    paddingInlineEnd: value,
+})
+
 const margin = createSpacer('margin')
 const padding = createSpacer('padding')
 const border = createSpacer('border')
 
 const _spaceMixins = {
     margin,
+    marginBlock,
+    marginInline,
     padding,
+    paddingBlock,
+    paddingInline,
     border,
 }
 

@@ -8,7 +8,7 @@ export const Slash: FC<Props> = memo(({}) => {
     return (
         <span
             css={{
-                ...css.margin({ x: 6 }),
+                ...css.marginInline(6),
             }}
         >
             /
