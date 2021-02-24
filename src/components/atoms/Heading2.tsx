@@ -20,34 +20,34 @@ import { FIconRounded } from './FIcon'
 // })
 
 const TextBlock = styled('h2')({
-    ...css.marginBlock(0),
-    marginLeft: 7.5,
+  ...css.marginBlock(0),
+  marginLeft: 7.5,
 
-    fontSize: 20,
-    transform: 'translateY(-0.5px)',
+  fontSize: 20,
+  transform: 'translateY(-0.5px)',
 })
 
 type Props = {
-    icon: string
+  icon: string
 }
 
 export const Heading2Icon: FC<Props> = memo(({ icon, children }) => {
-    return (
-        <Solid ai="center" css={{ ...css.marginBlock(12) }}>
-            <FIconRounded
-                {...{
-                    icon,
-                    size: 32,
-                    // background: color.orange(0.25),
-                    foreground: color.orange(),
-                }}
-                css={{
-                    transform: css.translate({ x: -2 }),
-                    boxShadow: glow(color.orange(0.15)),
-                }}
-            ></FIconRounded>
+  return (
+    <Solid ai="center" css={{ ...css.marginBlock(12) }}>
+      <FIconRounded
+        {...{
+          icon,
+          size: 32,
+          // background: color.orange(0.25),
+          foreground: color.orange(),
+        }}
+        css={{
+          transform: css.translate({ x: -2 }),
+          boxShadow: glow(color.orange(0.15)),
+        }}
+      ></FIconRounded>
 
-            <TextBlock>{children}</TextBlock>
-        </Solid>
-    )
+      <TextBlock>{children}</TextBlock>
+    </Solid>
+  )
 })

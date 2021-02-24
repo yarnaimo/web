@@ -5,53 +5,53 @@ import {} from 'rmwc/next'
 import { filterForward } from '../../services/view/emotion'
 
 type Props = {
-    jc?: CSSObject['justifyContent']
-    ai?: CSSObject['alignItems']
+  jc?: CSSObject['justifyContent']
+  ai?: CSSObject['alignItems']
 }
 
 export const createFlexComponent = (
-    styleAsFlexItem: CSSObject,
-    flexDirection: CSSObject['flexDirection'],
+  styleAsFlexItem: CSSObject,
+  flexDirection: CSSObject['flexDirection'],
 ) => {
-    const Component = forwardRef<any, ComponentProps<{}, {}, any> & Props>(
-        (
+  const Component = forwardRef<any, ComponentProps<{}, {}, any> & Props>(
+    (
+      {
+        tag: Tag = 'div',
+        css,
+        jc: justifyContent,
+        ai: alignItems,
+        children,
+        ...props
+      },
+      ref,
+    ) => {
+      return (
+        <Tag
+          css={[
             {
-                tag: Tag = 'div',
-                css,
-                jc: justifyContent,
-                ai: alignItems,
-                children,
-                ...props
+              display: 'flex',
+              flexDirection,
+              justifyContent,
+              alignItems,
             },
-            ref,
-        ) => {
-            return (
-                <Tag
-                    css={[
-                        {
-                            display: 'flex',
-                            flexDirection,
-                            justifyContent,
-                            alignItems,
-                        },
-                        styleAsFlexItem,
-                        css,
-                    ]}
-                    {...props}
-                    ref={ref}
-                >
-                    {children}
-                </Tag>
-            )
-        },
-    )
+            styleAsFlexItem,
+            css,
+          ]}
+          {...props}
+          ref={ref}
+        >
+          {children}
+        </Tag>
+      )
+    },
+  )
 
-    return Object.assign(Component, {}) as typeof Component & {}
+  return Object.assign(Component, {}) as typeof Component & {}
 }
 
 const propsFn = ({ jc: justifyContent, ai: alignItems }: Props) => ({
-    justifyContent,
-    alignItems,
+  justifyContent,
+  alignItems,
 })
 // export const Solid = createFlexComponent(
 //     {
@@ -61,39 +61,39 @@ const propsFn = ({ jc: justifyContent, ai: alignItems }: Props) => ({
 //     'row',
 // )
 export const Solid = styled('div', filterForward)<Props>(
-    {
-        display: 'flex',
-        flexDirection: 'row',
-        flexGrow: 0,
-        flexShrink: 0,
-    },
-    propsFn,
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+  propsFn,
 )
 export const SolidColumn = styled('div', filterForward)<Props>(
-    {
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 0,
-        flexShrink: 0,
-    },
-    propsFn,
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+  propsFn,
 )
 
 export const Liquid = styled('div', filterForward)<Props>(
-    {
-        display: 'flex',
-        flexDirection: 'row',
-        flexGrow: 1,
-        flexShrink: 1,
-    },
-    propsFn,
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+  propsFn,
 )
 export const LiquidColumn = styled('div', filterForward)<Props>(
-    {
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1,
-        flexShrink: 1,
-    },
-    propsFn,
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+  propsFn,
 )

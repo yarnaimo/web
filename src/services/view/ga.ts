@@ -4,13 +4,13 @@ import { webConfig } from '../../web-config'
 // import { analytics } from '../firebase'
 
 export const useGA = () => {
-    const router = useRouter()
+  const router = useRouter()
 
-    useEffectOnce(() => {
-        // initGA(code)
-        logPageView()
-        router.events.on('routeChangeComplete', logPageView)
-    })
+  useEffectOnce(() => {
+    // initGA(code)
+    logPageView()
+    router.events.on('routeChangeComplete', logPageView)
+  })
 }
 
 // export const initGA = (code: string) => {
@@ -21,17 +21,17 @@ export const useGA = () => {
 // }
 
 export const logPageView = () => {
-    if (webConfig.isDev) {
-        return
-    }
+  if (webConfig.isDev) {
+    return
+  }
 
-    // if (analytics) {
-    //     console.log(`Logging pageview for ${window.location.pathname}`)
-    //     analytics.logEvent('page_view', { page_path: window.location.pathname })
+  // if (analytics) {
+  //     console.log(`Logging pageview for ${window.location.pathname}`)
+  //     analytics.logEvent('page_view', { page_path: window.location.pathname })
 
-    //     // ReactGA.set({ page: window.location.pathname })
-    //     // ReactGA.pageview(window.location.pathname)
-    // }
+  //     // ReactGA.set({ page: window.location.pathname })
+  //     // ReactGA.pageview(window.location.pathname)
+  // }
 }
 
 // export const logEvent = (category = '', action = '') => {

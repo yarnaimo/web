@@ -23,194 +23,225 @@ const heroRatio = 328 / 375
 const heroRatioP = `${heroRatio * 100}%`
 
 const Z = styled('div')<{ z: number }>(({ z }) => {
-    const scale = z / -perspective + 1
-    return {
-        position: 'absolute',
-        top: navAreaY * scale,
-        transform: `translateX(-50%) translateZ(${z}px) scale(${scale})`,
-    }
+  const scale = z / -perspective + 1
+  return {
+    position: 'absolute',
+    top: navAreaY * scale,
+    transform: `translateX(-50%) translateZ(${z}px) scale(${scale})`,
+  }
 })
 
 const HeroImageOuter = styled(Z)({
-    ...css.absoluteFit,
-    left: '50%',
-    width: HeroWidth,
-    transformStyle: 'preserve-3d',
+  ...css.absoluteFit,
+  left: '50%',
+  width: HeroWidth,
+  transformStyle: 'preserve-3d',
 
-    [css.responsive.isMobile]: {
-        top: 0,
-    },
+  [css.responsive.isMobile]: {
+    top: 0,
+  },
 })
 
 export const PageSectionCentered = styled(PageSection)({
-    alignItems: 'center',
+  alignItems: 'center',
 }).withComponent(SolidColumn)
 
 const FullWidthImage = styled('img')({ width: '100%' })
 
-const MainCard: FC<{}> = memo(({}) => {
-    return (
-        <Container
-            css={{
-                ...css.marginBlock(4),
-                borderRadius: 24,
-            }}
+const MainCard: FC<{}> = memo(() => {
+  return (
+    <Container
+      css={{
+        ...css.marginBlock(4),
+        borderRadius: 24,
+      }}
+    >
+      <PageSectionCentered css={{ fontSize: 14 }}>
+        <Solid jc="space-between" css={{ ...css.marginBlock(8) }}>
+          <FIconBadge
+            href="https://twitter.com/yarnaimo"
+            {...iconPropMap.twitter}
+            label="Twitter"
+          ></FIconBadge>
+
+          <FIconBadge
+            href="https://github.com/yarnaimo"
+            {...iconPropMap.github}
+            label="GitHub"
+          ></FIconBadge>
+
+          <FIconBadge
+            href="https://qiita.com/yarnaimo"
+            {...iconPropMap.qiita}
+            label="Qiita"
+          ></FIconBadge>
+        </Solid>
+
+        <Divider></Divider>
+
+        <h1
+          css={{
+            fontSize: 18,
+            ...css.marginBlock(4),
+          }}
         >
-            <PageSectionCentered css={{ fontSize: 13 }}>
-                <Solid jc="space-between" css={{ ...css.marginBlock(8) }}>
-                    <FIconBadge
-                        href="https://twitter.com/yarnaimo"
-                        {...iconPropMap.twitter}
-                        label="Twitter"
-                    ></FIconBadge>
+          {'yarnaimo'}
+          <Slash></Slash>
+          <span css={{ fontSize: '0.9em' }}>{'やまいも'}</span>
+        </h1>
 
-                    <FIconBadge
-                        href="https://github.com/yarnaimo"
-                        {...iconPropMap.github}
-                        label="GitHub"
-                    ></FIconBadge>
+        <div
+          css={{
+            ...css.marginBlock(8),
+            fontSize: 11,
+            color: color.black(0.6),
+          }}
+        >
+          {'yarnaimo'}
+          <span
+            css={{
+              '&:before': {
+                content: '"@"',
+              },
+            }}
+          ></span>
+          {'gmail.com'}
+        </div>
 
-                    <FIconBadge
-                        href="https://qiita.com/yarnaimo"
-                        {...iconPropMap.qiita}
-                        label="Qiita"
-                    ></FIconBadge>
-                </Solid>
+        <p css={{ textAlign: 'center' }}>
+          {'WebアプリケーションやOSSの開発などを行っています。'}
+          <br></br>
+          {
+            'Web開発では主にTypeScript、React、Next.js、Firebaseなどを使用しています。'
+          }
+        </p>
 
-                <Divider></Divider>
+        <Solid css={{ ...css.margin({ top: 4 }) }}>
+          <FIconWithText
+            icon="calendar"
+            large
+            // background={color.orange(1)}
+            background={'transparent'}
+            foreground={color.orange(1)}
+            // foreground={color.orange(1)}
+            css={{
+              ...css.marginBlock(8),
+              paddingLeft: 36,
+            }}
+          >
+            {'1998 年'}
+          </FIconWithText>
 
-                <h1
-                    css={{
-                        fontSize: 18,
-                        ...css.marginBlock(4),
-                    }}
-                >
-                    yarnaimo<Slash></Slash>
-                    <span css={{ fontSize: '0.9em' }}>やまいも</span>
-                </h1>
+          <FIconWithText
+            icon="map-pin"
+            large
+            // background={color.brown(1)}
+            background={'transparent'}
+            foreground={color.brown(1)}
+            // foreground={color.brown(1)}
+            css={{
+              ...css.marginBlock(8),
+              marginLeft: 24,
+              paddingLeft: 36,
+            }}
+          >
+            {'大阪周辺'}
+          </FIconWithText>
+        </Solid>
 
-                <div
-                    css={{
-                        ...css.marginBlock(8),
-                        fontSize: 11,
-                        color: color.black(0.5),
-                    }}
-                >
-                    yarnaimo
-                    <span
-                        css={{
-                            '&:before': {
-                                content: '"@"',
-                            },
-                        }}
-                    ></span>
-                    gmail.com
-                </div>
+        {/* <FIconWithText
+          icon="heart"
+          large
+          // background={color.pinkv(1)}
+          background={'transparent'}
+          foreground={color.pinkv(1)}
+          // foreground={color.pinkv(0.7)}
+          css={{ ...css.marginBlock(8) }}
+        ></FIconWithText> */}
+      </PageSectionCentered>
 
-                <p css={{ textAlign: 'center' }}>
-                    Webサービスの開発などを行っています。
-                </p>
+      <Divider></Divider>
 
-                <Solid css={{ ...css.margin({ top: 4 }) }}>
-                    <FIconWithText
-                        icon="calendar"
-                        large
-                        // background={color.orange(1)}
-                        background={'transparent'}
-                        foreground={color.orange(1)}
-                        // foreground={color.orange(1)}
-                        css={{
-                            ...css.marginBlock(8),
-                            paddingLeft: 36,
-                        }}
-                    >
-                        1998 年
-                    </FIconWithText>
+      <PageSection>
+        <Heading2Icon icon="check-circle">{'Skills'}</Heading2Icon>
 
-                    <FIconWithText
-                        icon="home"
-                        large
-                        // background={color.brown(1)}
-                        background={'transparent'}
-                        foreground={color.brown(1)}
-                        // foreground={color.brown(1)}
-                        css={{
-                            ...css.marginBlock(8),
-                            marginLeft: 24,
-                            paddingLeft: 36,
-                        }}
-                    >
-                        大阪周辺
-                    </FIconWithText>
-                </Solid>
+        <UnorderedList>
+          <IListItem>{'HTML / CSS / UIデザイン'}</IListItem>
 
-                <FIconWithText
-                    icon="heart"
-                    large
-                    // background={color.pinkv(1)}
-                    background={'transparent'}
-                    foreground={color.pinkv(1)}
-                    // foreground={color.pinkv(0.7)}
-                    css={{ ...css.marginBlock(8) }}
-                >
-                    声優 <small>(上田麗奈)</small>
-                    <Slash></Slash>アイマス <small>(ミリオン: 高坂海美)</small>
-                    <Slash></Slash>音楽 <small>(MONACA・大原ゆい子 など)</small>
-                    <Slash></Slash>鉄道 <small>(信号・保安装置)</small> など
-                </FIconWithText>
-            </PageSectionCentered>
+          <IListItem>{'JavaScript'}</IListItem>
+          <IListItem>
+            <b>{'TypeScript '}</b>
+            <br></br>
+            <small>{'Compiler API / AST解析 / コード生成'}</small>
+          </IListItem>
 
-            <Divider></Divider>
+          <IListItem>
+            <b>{'Firebase '}</b>
+            <br></br>
+            <small>
+              {'Firestore / Cloud Functions / Authentication / Hosting'}
+            </small>
+          </IListItem>
 
-            <PageSection>
-                <Heading2Icon icon="check-circle">Skills</Heading2Icon>
+          <IListItem>
+            <b>{'React '}</b>
+            <br></br>
+            <small>{'React Hooks'}</small>
+          </IListItem>
+          <IListItem>
+            <b>{'Next.js '}</b>
+            <br></br>
+            <small>{'SSG / ISR'}</small>
+          </IListItem>
 
-                <UnorderedList>
-                    {[
-                        <>HTML / CSS</>,
-                        <b>UIデザイン</b>,
-                        <>
-                            JavaScript / <b>TypeScript</b>
-                        </>,
-                        <b>Firebase</b>,
-                        <>
-                            <b>React</b> / <b>Next.js</b>
-                        </>,
-                        <>
-                            Emotion <small>(CSS-in-JS)</small>
-                        </>,
-                        <b>Node.js</b>,
-                        <>TensorFlow / Keras</>,
-                    ].map((el, i) => (
-                        <IListItem key={i}>{el}</IListItem>
-                    ))}
-                </UnorderedList>
-            </PageSection>
+          <IListItem>
+            {'Emotion '}
+            <small>{'(CSS-in-JS)'}</small>
+          </IListItem>
 
-            <PageSection>
-                <Heading2Icon icon="tool">Development Tools</Heading2Icon>
+          <IListItem>
+            <b>{'Node.js'}</b>
+          </IListItem>
 
-                <UnorderedList>
-                    <IListItem>WSL (Ubuntu)</IListItem>
-                    <IListItem>Fish</IListItem>
-                    <IListItem>Git</IListItem>
-                    <IListItem>Visual Studio Code</IListItem>
-                    <IListItem>Yarn</IListItem>
-                    <IListItem>Jest</IListItem>
-                    <IListItem>Prettier</IListItem>
-                    <IListItem>Affinity Designer</IListItem>
-                </UnorderedList>
-            </PageSection>
-        </Container>
-    )
+          <IListItem>{'Puppeteer'}</IListItem>
+
+          <IListItem>{'TensorFlow / Keras'}</IListItem>
+        </UnorderedList>
+      </PageSection>
+
+      <PageSection>
+        <Heading2Icon icon="tool">{'Development Tools'}</Heading2Icon>
+
+        <UnorderedList>
+          {[
+            'WSL (Ubuntu)',
+            'Fish',
+            'Visual Studio Code',
+            'Git / GitHub',
+            'Lefthook',
+            'GitHub Actions',
+            'Docker',
+            'Yarn',
+            'Jest',
+            'ESLint',
+            'Prettier',
+            'Figma',
+            'Affinity Designer',
+          ].map((text, i) => (
+            <IListItem key={i}>{text}</IListItem>
+          ))}
+        </UnorderedList>
+      </PageSection>
+    </Container>
+  )
 })
 
-const HomePage: NextPage<Props> = ({}) => {
-    return (
-        <MainLayout lightBrown>
-            <Title title={null} path={null}></Title>
+const HomePage: NextPage<Props> = () => {
+  return (
+    <MainLayout lightBrown>
+      <Title title={null} path={null}></Title>
 
-            {/* <Z
+      {/* <Z
                 z={-32}
                 css={{
                     // position: 'fixed',
@@ -237,14 +268,14 @@ const HomePage: NextPage<Props> = ({}) => {
                 }}
             ></Z> */}
 
-            <SolidColumn
-                ai="center"
-                css={{
-                    width: '100%',
-                    // ...css.marginBlock(36),
-                }}
-            >
-                {/* <HeroImageOuter z={-8}>
+      <SolidColumn
+        ai="center"
+        css={{
+          width: '100%',
+          // ...css.marginBlock(36),
+        }}
+      >
+        {/* <HeroImageOuter z={-8}>
                 <FullWidthImage alt="" src="assets/hero.svg"></FullWidthImage>
             </HeroImageOuter>
 
@@ -252,14 +283,14 @@ const HomePage: NextPage<Props> = ({}) => {
                 <FullWidthImage alt="" src="assets/hero-1.svg"></FullWidthImage>
             </HeroImageOuter> */}
 
-                {/* <HeroImageOuter z={-24}>
+        {/* <HeroImageOuter z={-24}>
                     <FullWidthImage
                         alt=""
                         src="assets/hero-2.svg"
                     ></FullWidthImage>
                 </HeroImageOuter> */}
 
-                {/* <div
+        {/* <div
                 css={{
                     width: HeroWidth,
 
@@ -271,7 +302,7 @@ const HomePage: NextPage<Props> = ({}) => {
                 }}
             ></div> */}
 
-                {/* <Solid
+        {/* <Solid
                     ai="center"
                     jc="center"
                     css={{
@@ -280,27 +311,27 @@ const HomePage: NextPage<Props> = ({}) => {
                         border: `solid 2px ${color.black(0.05)}`,
                     }}
                 > */}
-                <div
-                    css={{
-                        ...css.size(120, 120),
-                        marginTop: 44,
-                        borderRadius: '50%',
-                        overflow: 'hidden',
-                        // boxShadow: shadows.icon(color.black(0.5)),
-                    }}
-                >
-                    <img
-                        alt="icon"
-                        src="assets/icons/manifest-icon-512.png"
-                        css={{ ...css.size('100%', '100%') }}
-                    ></img>
-                </div>
-                {/* </Solid> */}
+        <div
+          css={{
+            ...css.size(120, 120),
+            marginTop: 44,
+            borderRadius: '50%',
+            overflow: 'hidden',
+            // boxShadow: shadows.icon(color.black(0.6)),
+          }}
+        >
+          <img
+            alt="icon"
+            src="assets/icons/manifest-icon-512.png"
+            css={{ ...css.size('100%', '100%') }}
+          ></img>
+        </div>
+        {/* </Solid> */}
 
-                <MainCard></MainCard>
-            </SolidColumn>
-        </MainLayout>
-    )
+        <MainCard></MainCard>
+      </SolidColumn>
+    </MainLayout>
+  )
 }
 
 export default HomePage

@@ -13,26 +13,26 @@ import { GlobalStyle } from '../components/styles'
 import { webConfig } from '../web-config'
 
 export const App: AppType = ({ Component, pageProps }) => {
-    // useGA()
+  // useGA()
 
-    return (
-        <>
-            <Head>
-                <title>{webConfig.longAppName}</title>
-                <meta
-                    name="viewport"
-                    content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-                />
-            </Head>
+  return (
+    <>
+      <Head>
+        <title>{webConfig.longAppName}</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+        />
+      </Head>
 
-            <GlobalStyle></GlobalStyle>
+      <GlobalStyle></GlobalStyle>
 
-            <NavBar></NavBar>
-            <PageTransition>
-                <Component {...pageProps} />
-            </PageTransition>
-        </>
-    )
+      <NavBar></NavBar>
+      <PageTransition>
+        <Component {...pageProps} />
+      </PageTransition>
+    </>
+  )
 }
 
 export default App
