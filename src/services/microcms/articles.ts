@@ -1,33 +1,44 @@
-import { dayjs } from '../core/date'
-import { mcapi, MCItemBase } from './_api'
+import { Merge } from 'type-fest'
+import { isoOf } from '../../utils/date'
+import { Category, EntryBase, MCItemBase } from './types'
+import { mcapi } from './_api'
 
-export type ArticleEntry<Body = false> = {
-  type: 'article'
-  date: string
-  data: ArticleData<Body>
-}
+// export type ArticleEntry<Body = false> = {
+//   type: 'article'
+//   date: string
+//   data: ArticleData<Body>
+// }
+
+export type ArticleEntry = Merge<
+  EntryBase,
+  {
+    source: 'article'
+  }
+>
 
 export type ArticleData<Body = false> = MCItemBase & {
   title: string
+  categories: Category[]
   tags?: string
 } & (Body extends true ? { body: string } : {})
 
-const toEntry = (data: ArticleData): ArticleEntry => ({
-  type: 'article',
-  date: dayjs(data.updatedAt).toISOString(),
-  data,
-})
-
 export const getArticleEntries = async () => {
   const response = await mcapi.getAll<ArticleData>('/articles', [
-    `fields=id,createdAt,updatedAt,publishedAt,title,tags`,
+    // `fields=id,createdAt,updatedAt,publishedAt,title,tags`,
   ])
 
   return response.map(
-    (data): ArticleEntry => ({
-      type: 'article',
-      date: dayjs(data.updatedAt).toISOString(),
-      data,
+    ({ createdAt, updatedAt, tags, id, title, categories }): ArticleEntry => ({
+      source: 'article',
+      id,
+      createdAt: isoOf(createdAt),
+      updatedAt: isoOf(updatedAt),
+      pinned: false,
+      title,
+      categories,
+      tags: tags?.split(' ') ?? [],
+      url: `/articles/${id}`,
+      date: isoOf(updatedAt),
     }),
   )
 }

@@ -1,3 +1,4 @@
+import { extractCritical } from '@emotion/server'
 import Document, {
   DocumentContext,
   Head,
@@ -6,8 +7,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import React, { FC } from 'react'
-import { Fonts } from '../components/styles'
-import { webConfig } from '../web-config'
+import { webConfig } from '../app/webConfig'
 
 const DocumentHead: FC<{}> = () => {
   return (
@@ -57,15 +57,27 @@ const DocumentHead: FC<{}> = () => {
         href="/assets/icons/apple-icon-120.png"
       />
 
-      <Fonts></Fonts>
+      {/* <Fonts></Fonts> */}
     </Head>
   )
 }
 
-class MyDocument extends Document {
+class AppDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    const styles = extractCritical(initialProps.html)
+    return {
+      ...initialProps,
+      styles: (
+        <>
+          {initialProps.styles}
+          <style
+            data-emotion-css={styles.ids.join(' ')}
+            dangerouslySetInnerHTML={{ __html: styles.css }}
+          />
+        </>
+      ),
+    }
   }
 
   render() {
@@ -82,4 +94,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument
+export default AppDocument

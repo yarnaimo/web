@@ -1,12 +1,15 @@
-import { dayjs } from '../core/date'
+import { Merge } from 'type-fest'
+import { isoOf } from '../../utils/date'
+import { EntryBase } from '../microcms/types'
 
-export type QiitaItemEntry = {
-  type: 'qiita'
-  date: string
-  data: QiitaItemData
-}
+export type QiitaEntry = Merge<
+  EntryBase,
+  {
+    source: 'qiita'
+  }
+>
 
-export interface QiitaItemData {
+interface Article {
   rendered_body: string
   body: string
   coediting: boolean
@@ -58,21 +61,27 @@ interface Group {
   url_name: string
 }
 
-export const getQiitaEntries = async () => {
+export const getQiitaEntries = async (limit = 100) => {
   const data = await fetch(
-    'https://qiita.com/api/v2/users/yarnaimo/items?per_page=100',
+    `https://qiita.com/api/v2/users/yarnaimo/items?per_page=${limit}`,
   )
-  const json = (await data.json()) as QiitaItemData[]
+  const json = (await data.json()) as Article[]
 
   return json.map(
-    (data): QiitaItemEntry => ({
-      type: 'qiita' as const,
-      date: dayjs(data.created_at).toISOString(),
-      data: {
-        ...data,
-        rendered_body: data.rendered_body.slice(0, 200),
-        body: data.body.slice(0, 200),
-      },
+    ({ created_at, updated_at, tags, id, title, url }): QiitaEntry => ({
+      source: 'qiita',
+      id,
+      createdAt: isoOf(created_at),
+      updatedAt: isoOf(updated_at),
+      pinned: false,
+      title,
+      categories: ['dev'],
+      tags: tags.map(({ name }) => name),
+      url,
+      date: isoOf(created_at),
+
+      // rendered_body: data.rendered_body.slice(0, 200),
+      // body: data.body.slice(0, 200),
     }),
   )
 }
