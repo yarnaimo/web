@@ -1,4 +1,4 @@
-import { Box, Chip, Link, Stack, Typography } from '@material-ui/core'
+import { Box, Link, Stack, Typography } from '@material-ui/core'
 import {
   CreateRounded,
   GitHub,
@@ -16,6 +16,7 @@ import { ZennEntry } from '../../services/zenn/zenn'
 import { Cover } from '../common/Cover'
 import { Qiita, Zenn } from '../common/Icon'
 import { NextLink } from '../common/NextLink'
+import { TagList } from '../common/TagList'
 import { Thumb } from '../common/Thumb'
 
 export const EntryItemBase = ({
@@ -69,30 +70,7 @@ export const EntryItemBase = ({
           </NextLink>
         </Typography>
 
-        {tags.length > 0 && (
-          <Box
-            component="ul"
-            sx={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              pl: 0,
-              '& > *': {
-                my: 0.375,
-                mr: 0.75,
-              },
-            }}
-          >
-            {tags.map((tag, i) => (
-              <Chip
-                component="li"
-                size="small"
-                variant="outlined"
-                label={tag}
-                key={i}
-              ></Chip>
-            ))}
-          </Box>
-        )}
+        {tags.length > 0 && <TagList tags={tags}></TagList>}
 
         {body && (
           <Typography variant="body2" color="text.secondary" py={0.25}>
@@ -142,7 +120,7 @@ export const EntryItemList = memo(({ entries }: { entries: KnownEntry[] }) => {
 
 const serviceIcon = {
   music: () => <MusicNoteRounded></MusicNoteRounded>,
-  app: () => <WebRounded></WebRounded>,
+  dev: () => <WebRounded></WebRounded>,
   other: () => <CreateRounded></CreateRounded>,
 
   github: () => <GitHub></GitHub>,
@@ -163,21 +141,14 @@ export const ServiceEntryItem = (data: QiitaEntry | ZennEntry) => {
   )
 }
 
-export const ArticleEntryItem = (data: ArticleEntry) => {
+export const ArticleEntryItem = ({ body, ...data }: ArticleEntry) => {
   const category = data.categories[0]!
-  const serviceKey = (
-    {
-      music: 'music',
-      dev: 'app',
-      other: 'other',
-    } as const
-  )[category]
 
   return (
     <EntryItemBase
       {...{
-        ...appPalette[serviceKey],
-        cover: serviceIcon[serviceKey](),
+        ...appPalette[category],
+        cover: serviceIcon[category](),
         hideDate: false,
         ...data,
       }}
@@ -190,7 +161,7 @@ export const WorkEntryItem = ({ workSource, thumb, ...data }: WorkEntry) => {
     {
       github: 'github',
       song: 'music',
-      app: 'app',
+      app: 'dev',
     } as const
   )[workSource]
 

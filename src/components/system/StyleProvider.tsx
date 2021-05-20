@@ -117,7 +117,7 @@ export const theme = createTheme({
       selected: 'rgba(0, 0, 0, 0.06)',
     },
     primary: {
-      main: appPalette.app.color,
+      main: appPalette.dev.color,
       contrastText: common.white,
     },
     secondary: {

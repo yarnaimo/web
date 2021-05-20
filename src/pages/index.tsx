@@ -138,7 +138,7 @@ const Page = ({ devEntries, musicEntries, otherEntries }: Props) => {
         ></CategorySection>
 
         <CategorySection
-          color={appPalette.app.color}
+          color={appPalette.dev.color}
           heading="Dev"
           href="/dev"
           content={<EntryItemList entries={devEntries}></EntryItemList>}

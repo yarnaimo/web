@@ -5,7 +5,7 @@ import { WorkEntry } from './works'
 
 export const categoryMap = new Map([
   ['music', 'Music'],
-  ['dev', 'Development'],
+  ['dev', 'Dev'],
   ['other', 'Other'],
 ] as const)
 

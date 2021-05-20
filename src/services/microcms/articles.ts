@@ -16,11 +16,34 @@ export type ArticleEntry = Merge<
   }
 >
 
-export type ArticleData<Body = false> = MCItemBase & {
+export type ArticleData = MCItemBase & {
   title: string
   categories: Category[]
   tags?: string
-} & (Body extends true ? { body: string } : {})
+  body: string
+}
+
+const articleToEntry = ({
+  createdAt,
+  updatedAt,
+  tags,
+  id,
+  title,
+  categories,
+  body,
+}: ArticleData): ArticleEntry => ({
+  source: 'article',
+  id,
+  createdAt: isoOf(createdAt),
+  updatedAt: isoOf(updatedAt),
+  pinned: false,
+  title,
+  categories,
+  tags: tags?.split(' ') ?? [],
+  url: `/articles/${id}`,
+  date: isoOf(updatedAt),
+  body,
+})
 
 export const getArticleEntries = async (category?: Category) => {
   const response = await mcapi.getAll<ArticleData>('/articles', [
@@ -28,26 +51,13 @@ export const getArticleEntries = async (category?: Category) => {
     ...(category ? [`filters=categories[contains]${category}`] : []),
   ])
 
-  return response.map(
-    ({ createdAt, updatedAt, tags, id, title, categories }): ArticleEntry => ({
-      source: 'article',
-      id,
-      createdAt: isoOf(createdAt),
-      updatedAt: isoOf(updatedAt),
-      pinned: false,
-      title,
-      categories,
-      tags: tags?.split(' ') ?? [],
-      url: `/articles/${id}`,
-      date: isoOf(updatedAt),
-    }),
-  )
+  return response.map(articleToEntry)
 }
 
 export const getArticle = async (id: string, draftKey: string | undefined) => {
-  const response = await mcapi.get<ArticleData<true> | undefined>(
+  const response = await mcapi.get<ArticleData | undefined>(
     `/articles/${id}`,
     draftKey ? [`draftKey=${draftKey}`] : [],
   )
-  return response
+  return response && articleToEntry(response)
 }
