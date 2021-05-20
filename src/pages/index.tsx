@@ -20,9 +20,9 @@ import {
   WorkEntryItem,
 } from '../components/app/WorkItem'
 import { ColorLightHeading } from '../components/common/ColorLightHeading'
+import { CoverLink } from '../components/common/CoverLink'
 import { Qiita, Zenn } from '../components/common/Icon'
 import { NextLink } from '../components/common/NextLink'
-import { RoundedLink } from '../components/common/RoundedLink'
 import { MainLayout } from '../components/system/MainLayout'
 import { Title } from '../components/system/Title'
 import { ArticleEntry, getArticleEntries } from '../services/microcms/articles'
@@ -140,21 +140,21 @@ const Page = ({
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
-          <RoundedLink {...appPalette.twitter} href={profileUrl.twitter}>
+          <CoverLink {...appPalette.twitter} href={profileUrl.twitter}>
             <Twitter></Twitter>
-          </RoundedLink>
+          </CoverLink>
 
-          <RoundedLink {...appPalette.github} href={profileUrl.github}>
+          <CoverLink {...appPalette.github} href={profileUrl.github}>
             <GitHub></GitHub>
-          </RoundedLink>
+          </CoverLink>
 
-          <RoundedLink {...appPalette.qiita} href={profileUrl.qiita}>
+          <CoverLink {...appPalette.qiita} href={profileUrl.qiita}>
             <Qiita></Qiita>
-          </RoundedLink>
+          </CoverLink>
 
-          <RoundedLink {...appPalette.zenn} href={profileUrl.zenn}>
+          <CoverLink {...appPalette.zenn} href={profileUrl.zenn}>
             <Zenn></Zenn>
-          </RoundedLink>
+          </CoverLink>
         </Stack>
 
         <CategoryCard

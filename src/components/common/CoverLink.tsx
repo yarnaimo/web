@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core'
 import React, { memo, PropsWithChildren, useCallback } from 'react'
 
-export const RoundedLink = memo(
+export const CoverLink = memo(
   ({
     href,
     background,
@@ -35,13 +35,22 @@ export const RoundedLink = memo(
         <a href={href} target="_blank" rel="noreferrer">
           <Box
             sx={{
-              width: 'fit-content',
-              height: 'fit-content',
+              overflow: 'hidden',
+              borderRadius: '12px',
               background,
-              borderRadius: '50%',
             }}
           >
-            <IconButton color="primary">{children}</IconButton>
+            <IconButton
+              color="primary"
+              centerRipple={false}
+              sx={{
+                width: 56,
+                height: 56,
+                borderRadius: '0px',
+              }}
+            >
+              {children}
+            </IconButton>
           </Box>
         </a>
       </ThemeProvider>
