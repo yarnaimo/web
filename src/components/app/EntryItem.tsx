@@ -5,11 +5,11 @@ import {
   MusicNoteRounded,
   WebRounded,
 } from '@material-ui/icons'
-import React, { ReactElement } from 'react'
-import { appPalette } from '../../app/constants'
+import React, { memo, ReactElement } from 'react'
+import { appPalette, spacing } from '../../app/constants'
 import { useDateString } from '../../hooks/date'
 import { ArticleEntry } from '../../services/microcms/articles'
-import { EntryBase } from '../../services/microcms/types'
+import { EntryBase, KnownEntry } from '../../services/microcms/types'
 import { WorkEntry } from '../../services/microcms/works'
 import { QiitaEntry } from '../../services/qiita/items'
 import { ZennEntry } from '../../services/zenn/zenn'
@@ -129,6 +129,16 @@ export const EntryItem = (
       return <ServiceEntryItem {...data}></ServiceEntryItem>
   }
 }
+
+export const EntryItemList = memo(({ entries }: { entries: KnownEntry[] }) => {
+  return (
+    <Stack spacing={spacing.sectionItems}>
+      {entries.map((item) => (
+        <EntryItem {...item} key={item.id}></EntryItem>
+      ))}
+    </Stack>
+  )
+})
 
 const serviceIcon = {
   music: () => <MusicNoteRounded></MusicNoteRounded>,

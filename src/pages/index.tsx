@@ -11,7 +11,7 @@ import { GetStaticProps } from 'next'
 import React, { ReactNode, useCallback } from 'react'
 import { R } from '../../lib/remeda'
 import { appPalette, profileUrl, spacing } from '../app/constants'
-import { EntryItem } from '../components/app/EntryItem'
+import { EntryItemList } from '../components/app/EntryItem'
 import { ColorLight } from '../components/common/ColorLight'
 import { CoverLink } from '../components/common/CoverLink'
 import { Qiita, Zenn } from '../components/common/Icon'
@@ -134,39 +134,21 @@ const Page = ({ devEntries, musicEntries, otherEntries }: Props) => {
           color={appPalette.music.color}
           heading="Music"
           href="/music"
-          content={
-            <Stack spacing={spacing.sectionItems}>
-              {musicEntries.map((item) => (
-                <EntryItem {...item} key={item.id}></EntryItem>
-              ))}
-            </Stack>
-          }
+          content={<EntryItemList entries={musicEntries}></EntryItemList>}
         ></CategorySection>
 
         <CategorySection
           color={appPalette.app.color}
           heading="Dev"
           href="/dev"
-          content={
-            <Stack spacing={spacing.sectionItems}>
-              {devEntries.map((item) => (
-                <EntryItem {...item} key={item.id}></EntryItem>
-              ))}
-            </Stack>
-          }
+          content={<EntryItemList entries={devEntries}></EntryItemList>}
         ></CategorySection>
 
         <CategorySection
           color={appPalette.other.color}
           heading="Other"
           href="/other"
-          content={
-            <Stack spacing={spacing.sectionItems}>
-              {otherEntries.map((item) => (
-                <EntryItem {...item} key={item.id}></EntryItem>
-              ))}
-            </Stack>
-          }
+          content={<EntryItemList entries={otherEntries}></EntryItemList>}
         ></CategorySection>
       </Stack>
     </MainLayout>
