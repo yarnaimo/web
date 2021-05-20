@@ -112,19 +112,31 @@ const Page = ({ devEntries, musicEntries, otherEntries }: Props) => {
           </Stack>
 
           <Stack direction="row" justifyContent="space-between">
-            <CoverLink {...appPalette.twitter} href={profileUrl.twitter}>
+            <CoverLink
+              label="Twitter"
+              {...appPalette.twitter}
+              href={profileUrl.twitter}
+            >
               <Twitter></Twitter>
             </CoverLink>
 
-            <CoverLink {...appPalette.github} href={profileUrl.github}>
+            <CoverLink
+              label="GitHub"
+              {...appPalette.github}
+              href={profileUrl.github}
+            >
               <GitHub></GitHub>
             </CoverLink>
 
-            <CoverLink {...appPalette.qiita} href={profileUrl.qiita}>
+            <CoverLink
+              label="Qiita"
+              {...appPalette.qiita}
+              href={profileUrl.qiita}
+            >
               <Qiita></Qiita>
             </CoverLink>
 
-            <CoverLink {...appPalette.zenn} href={profileUrl.zenn}>
+            <CoverLink label="Zenn" {...appPalette.zenn} href={profileUrl.zenn}>
               <Zenn></Zenn>
             </CoverLink>
           </Stack>

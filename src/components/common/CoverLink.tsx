@@ -9,11 +9,13 @@ import React, { memo, PropsWithChildren, useCallback } from 'react'
 
 export const CoverLink = memo(
   ({
+    label,
     href,
     background,
     color,
     children,
   }: PropsWithChildren<{
+    label: string
     href: string
     background: string
     color: string
@@ -41,6 +43,7 @@ export const CoverLink = memo(
             }}
           >
             <IconButton
+              aria-label={label}
               color="primary"
               centerRipple={false}
               sx={{

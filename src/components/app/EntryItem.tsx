@@ -36,6 +36,7 @@ export const EntryItemBase = ({
   hideDate: boolean
 } & EntryBase) => {
   const dateString = useDateString(date)
+  const isExternalLink = url.startsWith('https://')
 
   return (
     <Stack
@@ -63,7 +64,8 @@ export const EntryItemBase = ({
             <Link
               color="inherit"
               display="block"
-              target={url.startsWith('https://') ? '_blank' : undefined}
+              target={isExternalLink ? '_blank' : undefined}
+              rel={isExternalLink ? 'noreferrer' : undefined}
             >
               {title}
             </Link>
