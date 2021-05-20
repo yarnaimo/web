@@ -1,3 +1,8 @@
+import { QiitaEntry } from '../qiita/items'
+import { ZennEntry } from '../zenn/zenn'
+import { ArticleEntry } from './articles'
+import { WorkEntry } from './works'
+
 export const categoryMap = new Map([
   ['music', 'Music'],
   ['dev', 'Development'],
@@ -48,3 +53,5 @@ export type EntryBase = EntryMeta & {
   thumb?: ImageEntity
   body?: string
 }
+
+export type KnownEntry = WorkEntry | ArticleEntry | QiitaEntry | ZennEntry

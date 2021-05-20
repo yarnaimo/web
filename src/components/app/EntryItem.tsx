@@ -117,6 +117,19 @@ export const EntryItemBase = ({
   )
 }
 
+export const EntryItem = (
+  data: WorkEntry | ArticleEntry | QiitaEntry | ZennEntry,
+) => {
+  switch (data.source) {
+    case 'work':
+      return <WorkEntryItem {...data}></WorkEntryItem>
+    case 'article':
+      return <ArticleEntryItem {...data}></ArticleEntryItem>
+    default:
+      return <ServiceEntryItem {...data}></ServiceEntryItem>
+  }
+}
+
 const serviceIcon = {
   music: () => <MusicNoteRounded></MusicNoteRounded>,
   app: () => <WebRounded></WebRounded>,

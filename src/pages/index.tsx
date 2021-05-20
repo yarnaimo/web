@@ -8,25 +8,22 @@ import {
 } from '@material-ui/core'
 import { ArrowForwardRounded, GitHub, Twitter } from '@material-ui/icons'
 import { GetStaticProps } from 'next'
-import React, { ReactNode, useCallback, useMemo } from 'react'
+import React, { ReactNode, useCallback } from 'react'
 import { R } from '../../lib/remeda'
 import { appPalette, profileUrl, spacing } from '../app/constants'
-import {
-  ArticleEntryItem,
-  ServiceEntryItem,
-  WorkEntryItem,
-} from '../components/app/WorkItem'
+import { EntryItem } from '../components/app/EntryItem'
 import { ColorLightHeading } from '../components/common/ColorLightHeading'
 import { CoverLink } from '../components/common/CoverLink'
 import { Qiita, Zenn } from '../components/common/Icon'
 import { NextLink } from '../components/common/NextLink'
 import { MainLayout } from '../components/system/MainLayout'
 import { Title } from '../components/system/Title'
-import { ArticleEntry, getArticleEntries } from '../services/microcms/articles'
-import { hasCategory } from '../services/microcms/types'
-import { getWorkEntries, WorkEntry } from '../services/microcms/works'
-import { getQiitaEntries, QiitaEntry } from '../services/qiita/items'
-import { getZennEntries, ZennEntry } from '../services/zenn/zenn'
+import { descSortEntries } from '../services/entry'
+import { getArticleEntries } from '../services/microcms/articles'
+import { hasCategory, KnownEntry } from '../services/microcms/types'
+import { getWorkEntries, workSourceIs } from '../services/microcms/works'
+import { getQiitaEntries } from '../services/qiita/items'
+import { getZennEntries } from '../services/zenn/zenn'
 
 const CategorySection = ({
   color,
@@ -77,27 +74,12 @@ const CategorySection = ({
 }
 
 type Props = {
-  workEntries: WorkEntry[]
-  devEntries: (QiitaEntry | ZennEntry | ArticleEntry)[]
-  musicEntries: ArticleEntry[]
-  otherEntries: ArticleEntry[]
+  devEntries: KnownEntry[]
+  musicEntries: KnownEntry[]
+  otherEntries: KnownEntry[]
 }
 
-const Page = ({
-  workEntries,
-  devEntries,
-  musicEntries,
-  otherEntries,
-}: Props) => {
-  const [songs, repos, apps] = useMemo(
-    () => [
-      workEntries.filter(({ workSource }) => workSource === 'song'),
-      workEntries.filter(({ workSource }) => workSource === 'github'),
-      workEntries.filter(({ workSource }) => workSource === 'app'),
-    ],
-    [workEntries],
-  )
-
+const Page = ({ devEntries, musicEntries, otherEntries }: Props) => {
   return (
     <MainLayout>
       <Title title={null} path={null}></Title>
@@ -152,11 +134,8 @@ const Page = ({
           href="/music"
           content={
             <Stack spacing={spacing.sectionItems}>
-              {songs.map((item) => (
-                <WorkEntryItem {...item} key={item.id}></WorkEntryItem>
-              ))}
               {musicEntries.map((item) => (
-                <ArticleEntryItem {...item} key={item.id}></ArticleEntryItem>
+                <EntryItem {...item} key={item.id}></EntryItem>
               ))}
             </Stack>
           }
@@ -168,19 +147,9 @@ const Page = ({
           href="/dev"
           content={
             <Stack spacing={spacing.sectionItems}>
-              {repos.map((item) => (
-                <WorkEntryItem {...item} key={item.id}></WorkEntryItem>
+              {devEntries.map((item) => (
+                <EntryItem {...item} key={item.id}></EntryItem>
               ))}
-              {apps.map((item) => (
-                <WorkEntryItem {...item} key={item.id}></WorkEntryItem>
-              ))}
-              {devEntries.map((item) =>
-                item.source === 'article' ? (
-                  <ArticleEntryItem {...item} key={item.id}></ArticleEntryItem>
-                ) : (
-                  <ServiceEntryItem {...item} key={item.id}></ServiceEntryItem>
-                ),
-              )}
             </Stack>
           }
         ></CategorySection>
@@ -192,7 +161,7 @@ const Page = ({
           content={
             <Stack spacing={spacing.sectionItems}>
               {otherEntries.map((item) => (
-                <ArticleEntryItem {...item} key={item.id}></ArticleEntryItem>
+                <EntryItem {...item} key={item.id}></EntryItem>
               ))}
             </Stack>
           }
@@ -204,31 +173,38 @@ const Page = ({
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const limit = 4
+  const takeEntries = R.take<KnownEntry>(limit)
 
-  const [workEntries, articleEntries, qiitaEntries, zennEntries] =
-    await Promise.all([
-      getWorkEntries(true),
-      getArticleEntries(),
-      getQiitaEntries(limit),
-      getZennEntries(limit),
-    ])
+  const [pinnedWorks, articles, qiitas, zenns] = await Promise.all([
+    getWorkEntries(true),
+    getArticleEntries(),
+    getQiitaEntries(limit),
+    getZennEntries(limit),
+  ])
 
-  const musicEntries = articleEntries.filter(hasCategory('music'))
-  const otherEntries = articleEntries.filter(hasCategory('other'))
+  const musicEntries = [
+    ...pinnedWorks.filter(workSourceIs('song')),
+    ...takeEntries(articles.filter(hasCategory('music'))),
+  ]
 
-  const devEntries = R.pipe(
-    [
-      ...qiitaEntries,
-      ...zennEntries,
-      ...articleEntries.filter(hasCategory('dev')),
-    ],
-    R.sortBy(({ date }) => date),
-    R.reverse(),
-    R.take(limit),
-  )
+  const devEntries = [
+    ...pinnedWorks.filter(workSourceIs('github')),
+    ...pinnedWorks.filter(workSourceIs('app')),
+    ...R.pipe(
+      [...qiitas, ...zenns, ...articles.filter(hasCategory('dev'))],
+      descSortEntries,
+      takeEntries,
+    ),
+  ]
+
+  const otherEntries = takeEntries(articles.filter(hasCategory('other')))
 
   return {
-    props: { workEntries, devEntries, musicEntries, otherEntries },
+    props: {
+      devEntries,
+      musicEntries,
+      otherEntries,
+    },
     revalidate: 60 * 5,
   }
 }

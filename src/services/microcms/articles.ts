@@ -22,9 +22,10 @@ export type ArticleData<Body = false> = MCItemBase & {
   tags?: string
 } & (Body extends true ? { body: string } : {})
 
-export const getArticleEntries = async () => {
+export const getArticleEntries = async (category?: Category) => {
   const response = await mcapi.getAll<ArticleData>('/articles', [
     // `fields=id,createdAt,updatedAt,publishedAt,title,tags`,
+    ...(category ? [`filters=categories[contains]${category}`] : []),
   ])
 
   return response.map(
