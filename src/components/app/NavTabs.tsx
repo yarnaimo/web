@@ -58,11 +58,13 @@ const createTabsComponent = (bottom: boolean) => {
       ? { position: 'fixed', width: '100%', bottom: 0, left: 0 }
       : { position: 'fixed', height: '100%', top: 0, left: 0, pt: 12 }
 
-    const indicatorStyles: SxProps = bottom ? { bottom: 'unset', top: 0 } : {}
+    const indicatorStyles: SxProps = bottom
+      ? { bottom: 'unset', top: 0, height: 3 }
+      : { width: 3 }
 
     const indicatorSpanStyles: SxProps = bottom
-      ? { height: 3, minWidth: 44, borderRadius: '0 0 3px 3px' }
-      : { width: 3, minHeight: 48, borderRadius: '3px 0 0 3px' }
+      ? { height: '100%', minWidth: 44, borderRadius: '0 0 3px 3px' }
+      : { width: '100%', minHeight: 48, borderRadius: '3px 0 0 3px' }
 
     return (
       <Box
