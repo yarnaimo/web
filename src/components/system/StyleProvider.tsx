@@ -222,6 +222,17 @@ export const theme = createTheme({
       },
     },
 
+    MuiAccordion: {
+      defaultProps: {
+        elevation: 2,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: '8px!important',
+        },
+      },
+    },
+
     MuiFab: {
       styleOverrides: {
         root: {

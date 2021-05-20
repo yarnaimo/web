@@ -9,25 +9,18 @@ import { Title } from '../components/system/Title'
 import { descSortEntries } from '../services/entry'
 import { getArticleEntries } from '../services/microcms/articles'
 import { KnownEntry } from '../services/microcms/types'
-import { getWorkEntries } from '../services/microcms/works'
 
 type Props = {
-  workEntries: KnownEntry[]
   articleEntries: KnownEntry[]
 }
 
-const Page = ({ workEntries, articleEntries }: Props) => {
+const Page = ({ articleEntries }: Props) => {
   return (
     <MainLayout>
       <Title title={null} path={null}></Title>
 
       <Stack spacing={spacing.rootS}>
-        <Typography variant="h2">{'Music'}</Typography>
-
-        <Stack component="section" spacing={spacing.sectionItems}>
-          <SectionHeading>{'Works'}</SectionHeading>
-          <EntryItemList entries={workEntries}></EntryItemList>
-        </Stack>
+        <Typography variant="h2">{'Other'}</Typography>
 
         <Stack component="section" spacing={spacing.sectionItems}>
           <SectionHeading>{'Articles'}</SectionHeading>
@@ -39,15 +32,12 @@ const Page = ({ workEntries, articleEntries }: Props) => {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const [workEntries, articles] = await Promise.all([
-    getWorkEntries(false, 'song'),
-    getArticleEntries('music'),
-  ])
+  const articles = await getArticleEntries('other')
 
   const articleEntries = descSortEntries(articles)
 
   return {
-    props: { workEntries, articleEntries },
+    props: { articleEntries },
     revalidate: 60 * 5,
   }
 }
