@@ -68,7 +68,7 @@ const globalStyles: CSSObject = {
     overflowWrap: 'break-word',
     textTransform: 'none',
     // background: grey[50],
-    background: '#fdfdfd',
+    background: '#ffffff',
     // color: grey[900],
     WebkitTapHighlightColor: 'transparent',
   },

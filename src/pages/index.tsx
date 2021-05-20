@@ -1,8 +1,5 @@
 import {
   Button,
-  Card,
-  CardActions,
-  CardContent,
   createTheme,
   Stack,
   Theme,
@@ -31,7 +28,7 @@ import { getWorkEntries, WorkEntry } from '../services/microcms/works'
 import { getQiitaEntries, QiitaEntry } from '../services/qiita/items'
 import { getZennEntries, ZennEntry } from '../services/zenn/zenn'
 
-const CategoryCard = ({
+const CategorySection = ({
   color,
   heading,
   content,
@@ -55,24 +52,14 @@ const CategoryCard = ({
   )
 
   return (
-    <Card
-      sx={{
-        '*:not(style) + &:not(style)': {
-          mx: -2,
-        },
-      }}
-    >
-      <CardContent>
-        <Stack spacing={1.5}>
-          <ColorLightHeading color={color}>
-            <span style={{ transform: 'translateY(1px)' }}>{heading}</span>
-          </ColorLightHeading>
+    <Stack component="section" spacing={2}>
+      <ColorLightHeading color={color}>
+        <span style={{ transform: 'translateY(1px)' }}>{heading}</span>
+      </ColorLightHeading>
 
-          {content}
-        </Stack>
-      </CardContent>
+      {content}
 
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
+      <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
         <ThemeProvider theme={_theme}>
           <NextLink href={href}>
             <Button
@@ -84,8 +71,8 @@ const CategoryCard = ({
             </Button>
           </NextLink>
         </ThemeProvider>
-      </CardActions>
-    </Card>
+      </Stack>
+    </Stack>
   )
 }
 
@@ -119,45 +106,47 @@ const Page = ({
     <MainLayout>
       <Title title={null} path={null}></Title>
 
-      <Stack spacing={4}>
-        <Stack spacing={1} mt={1}>
-          <Typography variant="h1">
-            <Typography
-              component="span"
-              variant="inherit"
-              color="text.disabled"
-              sx={{ mr: 0.5 }}
-            >
-              {'@'}
+      <Stack spacing={5}>
+        <Stack spacing={4} component="section" sx={{ pt: 3, pb: 1 }}>
+          <Stack spacing={0.5}>
+            <Typography variant="h1" fontWeight={800}>
+              <Typography
+                component="span"
+                variant="inherit"
+                color="text.disabled"
+                sx={{ mr: 0.5 }}
+              >
+                {'@'}
+              </Typography>
+
+              {'yarnaimo'}
             </Typography>
 
-            {'yarnaimo'}
-          </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {'Web開発 / 作編曲'}
+            </Typography>
+          </Stack>
 
-          <Typography variant="body2" color="text.secondary">
-            {'Web開発 / 作編曲'}
-          </Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <CoverLink {...appPalette.twitter} href={profileUrl.twitter}>
+              <Twitter></Twitter>
+            </CoverLink>
+
+            <CoverLink {...appPalette.github} href={profileUrl.github}>
+              <GitHub></GitHub>
+            </CoverLink>
+
+            <CoverLink {...appPalette.qiita} href={profileUrl.qiita}>
+              <Qiita></Qiita>
+            </CoverLink>
+
+            <CoverLink {...appPalette.zenn} href={profileUrl.zenn}>
+              <Zenn></Zenn>
+            </CoverLink>
+          </Stack>
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between">
-          <CoverLink {...appPalette.twitter} href={profileUrl.twitter}>
-            <Twitter></Twitter>
-          </CoverLink>
-
-          <CoverLink {...appPalette.github} href={profileUrl.github}>
-            <GitHub></GitHub>
-          </CoverLink>
-
-          <CoverLink {...appPalette.qiita} href={profileUrl.qiita}>
-            <Qiita></Qiita>
-          </CoverLink>
-
-          <CoverLink {...appPalette.zenn} href={profileUrl.zenn}>
-            <Zenn></Zenn>
-          </CoverLink>
-        </Stack>
-
-        <CategoryCard
+        <CategorySection
           color={appPalette.music.color}
           heading="Music"
           href="/music"
@@ -171,9 +160,9 @@ const Page = ({
               ))}
             </CardItemStack>
           }
-        ></CategoryCard>
+        ></CategorySection>
 
-        <CategoryCard
+        <CategorySection
           color={appPalette.app.color}
           heading="Dev"
           href="/dev"
@@ -194,9 +183,9 @@ const Page = ({
               )}
             </CardItemStack>
           }
-        ></CategoryCard>
+        ></CategorySection>
 
-        <CategoryCard
+        <CategorySection
           color={appPalette.other.color}
           heading="Other"
           href="/other"
@@ -207,7 +196,7 @@ const Page = ({
               ))}
             </CardItemStack>
           }
-        ></CategoryCard>
+        ></CategorySection>
       </Stack>
     </MainLayout>
   )

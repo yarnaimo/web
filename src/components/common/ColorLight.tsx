@@ -8,7 +8,7 @@ export const ColorLight = ({ background }: { background: string }) => {
         display: 'inline-block',
         width: 6,
         height: 6,
-        mr: 1,
+        mr: 1.25,
         borderRadius: '50%',
         background,
       }}

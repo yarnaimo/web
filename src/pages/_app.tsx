@@ -19,10 +19,9 @@ export const App: AppType = ({ Component, pageProps }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
         <link
-          href={fontHref('Nunito+Sans:wght@400;600;700')}
+          href={fontHref('Nunito+Sans:wght@400;600;700;800')}
           rel="stylesheet"
         ></link>
-        <link href={fontHref('Cabin:wght@400;600')} rel="stylesheet"></link>
       </Head>
 
       <StyleProvider>

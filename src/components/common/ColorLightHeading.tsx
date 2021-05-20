@@ -11,6 +11,7 @@ export const ColorLightHeading = ({
       variant="subtitle2"
       component="h2"
       color="text.secondary"
+      fontWeight={700}
       sx={{ display: 'flex', alignItems: 'center', transform: 'none' }}
     >
       <ColorLight background={color}></ColorLight>
