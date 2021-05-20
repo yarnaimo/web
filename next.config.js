@@ -16,8 +16,8 @@ module.exports = {
     webpack5: true,
   },
 
-  webpack: (config, { isServer }) => {
-    if (isServer) {
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && isServer) {
       config.module.rules[1].use = [
         config.module.rules[1].use,
         {
