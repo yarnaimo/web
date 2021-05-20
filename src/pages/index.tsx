@@ -10,7 +10,7 @@ import { ArrowForwardRounded, GitHub, Twitter } from '@material-ui/icons'
 import { GetStaticProps } from 'next'
 import React, { ReactNode, useCallback, useMemo } from 'react'
 import { R } from '../../lib/remeda'
-import { appPalette, profileUrl } from '../app/constants'
+import { appPalette, profileUrl, spacing } from '../app/constants'
 import {
   ArticleEntryItem,
   ServiceEntryItem,
@@ -52,7 +52,7 @@ const CategorySection = ({
   )
 
   return (
-    <Stack component="section" spacing={2}>
+    <Stack component="section" spacing={spacing.sectionItems}>
       <ColorLightHeading color={color}>
         <span style={{ transform: 'translateY(1px)' }}>{heading}</span>
       </ColorLightHeading>
@@ -74,10 +74,6 @@ const CategorySection = ({
       </Stack>
     </Stack>
   )
-}
-
-const CardItemStack = ({ children }: { children: ReactNode }) => {
-  return <Stack spacing={2}>{children}</Stack>
 }
 
 type Props = {
@@ -106,8 +102,12 @@ const Page = ({
     <MainLayout>
       <Title title={null} path={null}></Title>
 
-      <Stack spacing={5}>
-        <Stack spacing={4} component="section" sx={{ pt: 3, pb: 1 }}>
+      <Stack spacing={spacing.root}>
+        <Stack
+          spacing={spacing.rootS}
+          component="section"
+          sx={{ pt: 3, pb: 1 }}
+        >
           <Stack spacing={0.5}>
             <Typography variant="h1" fontWeight={800}>
               <Typography
@@ -151,14 +151,14 @@ const Page = ({
           heading="Music"
           href="/music"
           content={
-            <CardItemStack>
+            <Stack spacing={spacing.sectionItems}>
               {songs.map((item) => (
                 <WorkEntryItem {...item} key={item.id}></WorkEntryItem>
               ))}
               {musicEntries.map((item) => (
                 <ArticleEntryItem {...item} key={item.id}></ArticleEntryItem>
               ))}
-            </CardItemStack>
+            </Stack>
           }
         ></CategorySection>
 
@@ -167,7 +167,7 @@ const Page = ({
           heading="Dev"
           href="/dev"
           content={
-            <CardItemStack>
+            <Stack spacing={spacing.sectionItems}>
               {repos.map((item) => (
                 <WorkEntryItem {...item} key={item.id}></WorkEntryItem>
               ))}
@@ -181,7 +181,7 @@ const Page = ({
                   <ServiceEntryItem {...item} key={item.id}></ServiceEntryItem>
                 ),
               )}
-            </CardItemStack>
+            </Stack>
           }
         ></CategorySection>
 
@@ -190,11 +190,11 @@ const Page = ({
           heading="Other"
           href="/other"
           content={
-            <CardItemStack>
+            <Stack spacing={spacing.sectionItems}>
               {otherEntries.map((item) => (
                 <ArticleEntryItem {...item} key={item.id}></ArticleEntryItem>
               ))}
-            </CardItemStack>
+            </Stack>
           }
         ></CategorySection>
       </Stack>

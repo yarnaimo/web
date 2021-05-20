@@ -4,6 +4,7 @@ import DOMPurify from 'isomorphic-dompurify'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
+import { spacing } from '../../app/constants'
 import { MainLayout } from '../../components/system/MainLayout'
 import { Title } from '../../components/system/Title'
 import { ArticleData, getArticle } from '../../services/microcms/articles'
@@ -46,7 +47,7 @@ export const ArticleBody = (article: Props) => {
   )
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={spacing.rootS}>
       <Typography variant="h1">{article.title}</Typography>
 
       <div dangerouslySetInnerHTML={{ __html: cleanHTML }}></div>

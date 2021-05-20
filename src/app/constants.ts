@@ -24,3 +24,9 @@ export const profileUrl = {
   qiita: 'https://qiita.com/yarnaimo',
   zenn: 'https://zenn.dev/yarnaimo',
 }
+
+export const spacing = {
+  root: 5,
+  rootS: 4,
+  sectionItems: 2,
+} as const
