@@ -254,7 +254,7 @@ export const theme = createTheme({
           boxShadow: 'none!important',
           borderRadius: 6,
           // fontSize: '1rem',
-          fontWeight: 600,
+          fontWeight: 700,
           textTransform: 'none',
         },
       },
