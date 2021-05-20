@@ -107,6 +107,8 @@ const globalStyles: CSSObject = {
   },
 }
 
+const secondaryTextColor = 'rgba(0, 0, 0, 0.5)'
+
 export const theme = createTheme({
   palette: {
     // contrastThreshold: 2,
@@ -122,7 +124,7 @@ export const theme = createTheme({
       main: appPalette.other.color,
     },
     text: {
-      secondary: 'rgba(0, 0, 0, 0.5)',
+      secondary: secondaryTextColor,
     },
   },
 
@@ -132,7 +134,7 @@ export const theme = createTheme({
     ...headingStyles,
     // subtitle1: { color: blueGrey[600] },
     // subtitle2: { color: blueGrey[600] },
-    subtitle2: { lineHeight },
+    subtitle2: { lineHeight, fontWeight: 700, color: secondaryTextColor },
     body1: { fontSize: '1rem', lineHeight },
     body2: { lineHeight },
     // caption: { fontSize: '0.9rem' },

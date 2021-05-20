@@ -12,10 +12,11 @@ import React, { ReactNode, useCallback } from 'react'
 import { R } from '../../lib/remeda'
 import { appPalette, profileUrl, spacing } from '../app/constants'
 import { EntryItem } from '../components/app/EntryItem'
-import { ColorLightHeading } from '../components/common/ColorLightHeading'
+import { ColorLight } from '../components/common/ColorLight'
 import { CoverLink } from '../components/common/CoverLink'
 import { Qiita, Zenn } from '../components/common/Icon'
 import { NextLink } from '../components/common/NextLink'
+import { SectionHeading } from '../components/common/SectionHeading'
 import { MainLayout } from '../components/system/MainLayout'
 import { Title } from '../components/system/Title'
 import { descSortEntries } from '../services/entry'
@@ -50,9 +51,10 @@ const CategorySection = ({
 
   return (
     <Stack component="section" spacing={spacing.sectionItems}>
-      <ColorLightHeading color={color}>
-        <span style={{ transform: 'translateY(1px)' }}>{heading}</span>
-      </ColorLightHeading>
+      <SectionHeading>
+        <ColorLight background={color}></ColorLight>
+        {heading}
+      </SectionHeading>
 
       {content}
 
