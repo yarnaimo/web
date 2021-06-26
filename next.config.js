@@ -1,3 +1,7 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 const replaceOptions = {
   search: /import\s+\{([^}]+?)\}\s+from\s+['"]@material-ui\/icons['"]/,
   replace: (_, m) => {
@@ -11,7 +15,7 @@ const replaceOptions = {
   },
 }
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   future: {
     webpack5: true,
   },
@@ -28,4 +32,4 @@ module.exports = {
     }
     return config
   },
-}
+})
