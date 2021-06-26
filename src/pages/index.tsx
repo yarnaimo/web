@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   createTheme,
   Stack,
@@ -90,9 +91,15 @@ const Page = ({ devEntries, musicEntries, otherEntries }: Props) => {
         <Stack
           spacing={spacing.rootS}
           component="section"
-          sx={{ pt: 3, pb: 1 }}
+          sx={{ pt: 2, pb: 1 }}
         >
           <Stack spacing={0.5}>
+            <Avatar
+              src="/assets/icons/manifest-icon-192.png"
+              alt=""
+              sx={{ width: 64, height: 64, mb: 1.5 }}
+            ></Avatar>
+
             <Typography variant="h1" fontWeight={800}>
               <Typography
                 component="span"
