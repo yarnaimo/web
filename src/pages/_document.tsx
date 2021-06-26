@@ -57,7 +57,18 @@ const DocumentHead: FC<{}> = () => {
         href="/assets/icons/apple-icon-120.png"
       />
 
-      {/* <Fonts></Fonts> */}
+      <link
+        href={
+          'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=block'
+        }
+        rel="stylesheet"
+      ></link>
+      <link
+        href={
+          'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@800&text=@yarnaimo&display=block'
+        }
+        rel="stylesheet"
+      ></link>
     </Head>
   )
 }

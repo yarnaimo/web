@@ -5,7 +5,6 @@ import React from 'react'
 import { webConfig } from '../app/webConfig'
 import { BottomTabs, SideTabs } from '../components/app/NavTabs'
 import { StyleProvider } from '../components/system/StyleProvider'
-import { fontHref } from '../utils/url'
 
 export const App: AppType = ({ Component, pageProps }) => {
   // useGA()
@@ -18,14 +17,6 @@ export const App: AppType = ({ Component, pageProps }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
-        <link
-          href={fontHref('Nunito+Sans:wght@400;700')}
-          rel="stylesheet"
-        ></link>
-        <link
-          href={fontHref('Nunito+Sans:wght@800&text=@yarnaimo')}
-          rel="stylesheet"
-        ></link>
       </Head>
 
       <StyleProvider>
